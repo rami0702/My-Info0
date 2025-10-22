@@ -262,6 +262,7 @@ p {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, #6e45e2 0%, #88d3ce 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -475,7 +476,8 @@ footer {
 
 .ram-logo i {
   color: var(--accent);
-  margin-right: 10px;
+  /* use logical margin so spacing works in LTR and RTL */
+  margin-inline-end: 10px;
 }
 
 .copyright {
