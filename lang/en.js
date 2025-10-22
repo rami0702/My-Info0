@@ -55,3 +55,40 @@ const en = {
     copyright: "All Rights Reserved",
     allRightsReserved: "All Rights Reserved"
 };
+
+// Expose to window so setLanguage can access reliably
+window.en = en;
+// Additional keys added by patch
+Object.assign(window.en, {
+    skill_html_css: 'HTML5 & CSS3',
+    skill_js: 'JavaScript (ES6+)',
+    skill_react: 'React.js',
+    skill_vue: 'Vue.js',
+    skill_responsive: 'Responsive Design',
+    skill_node: 'Node.js',
+    skill_python: 'Python',
+    skill_php: 'PHP',
+    skill_mysql_mongo: 'MySQL / MongoDB',
+    skill_rest: 'RESTful APIs',
+    skill_unity: 'Unity (C#)',
+    skill_unreal: 'Unreal Engine',
+    skill_lua: 'Lua (Love2D)',
+    skill_game_design: 'Game Design',
+    skill_3d: '3D Modeling',
+    skill_git: 'Git & GitHub',
+    skill_docker: 'Docker',
+    skill_figma: 'Figma / Adobe XD',
+    skill_blender: 'Blender',
+    skill_cicd: 'CI/CD Pipelines',
+    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 REAL-TIME',
+    demo_threats_label: 'Threats Detected:',
+    demo_processes_label: 'Active Processes:',
+    demo_files_label: 'Files Scanned:',
+    demo_status_label: 'Status:',
+    statusReady: 'Ready',
+    quickScanLabel: 'Quick System Scan',
+    deepAnalysisLabel: 'Deep Threat Analysis',
+    customHuntLabel: 'Custom Threat Hunt',
+    nuclearLabel: 'Nuclear Cleanse',
+    guardianLabel: 'Real-Time Guardian'
+});

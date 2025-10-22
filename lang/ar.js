@@ -55,3 +55,40 @@ const ar = {
     copyright: "جميع الحقوق محفوظة",
     allRightsReserved: "جميع الحقوق محفوظة"
 };
+
+// Expose to window so setLanguage can access reliably
+window.ar = ar;
+// Additional Arabic keys
+Object.assign(window.ar, {
+    skill_html_css: 'HTML5 & CSS3',
+    skill_js: 'JavaScript (ES6+)',
+    skill_react: 'React.js',
+    skill_vue: 'Vue.js',
+    skill_responsive: 'تصميم متجاوب',
+    skill_node: 'Node.js',
+    skill_python: 'Python',
+    skill_php: 'PHP',
+    skill_mysql_mongo: 'MySQL / MongoDB',
+    skill_rest: 'RESTful APIs',
+    skill_unity: 'Unity (C#)',
+    skill_unreal: 'Unreal Engine',
+    skill_lua: 'Lua (Love2D)',
+    skill_game_design: 'تصميم ألعاب',
+    skill_3d: 'نمذجة ثلاثية الأبعاد',
+    skill_git: 'Git & GitHub',
+    skill_docker: 'Docker',
+    skill_figma: 'Figma / Adobe XD',
+    skill_blender: 'Blender',
+    skill_cicd: 'CI/CD Pipelines',
+    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 في الوقت الحقيقي',
+    demo_threats_label: 'التهديدات المكتشفة:',
+    demo_processes_label: 'العمليات النشطة:',
+    demo_files_label: 'الملفات الممسوحة:',
+    demo_status_label: 'الحالة:',
+    statusReady: 'جاهز',
+    quickScanLabel: 'فحص سريع',
+    deepAnalysisLabel: 'تحليل عميق',
+    customHuntLabel: 'بحث مخصص',
+    nuclearLabel: 'تنظيف نووي',
+    guardianLabel: 'الحماية الفورية'
+});

@@ -63,6 +63,7 @@ body {
   border-radius: 15px;
   transition: var(--transition);
 }
+.lang-btn { font-size: 0.95rem; min-width: 44px; text-align: center; }
 
 .lang-btn.active {
   background: var(--primary);
@@ -141,6 +142,16 @@ section {
   visibility: visible !important;
 }
 
+/* Smooth fade-in that doesn't change layout (use opacity + transform only) */
+.in-view {
+  animation: fadeInUp 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 h2 {
   font-size: 2.5rem;
   margin-bottom: 40px;
@@ -206,6 +217,12 @@ p {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* Normalize list and nav sizing to avoid one list appearing larger */
+ul, ol {
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .skill-category li {
@@ -288,21 +305,30 @@ p {
   gap: 30px;
   margin-top: 40px;
 }
+/* Make grid rows consistent and allow cards to stretch to equal heights */
+.projects-grid {
+  grid-auto-rows: 1fr; /* each row will be at least the height needed and cards will stretch */
+}
 
 .featured-project {
-  grid-column: 1 / -1;
+  /* treat featured project like a normal card so it matches other cards */
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   border: 1px solid rgba(110, 69, 226, 0.3);
   border-radius: 10px;
   overflow: hidden;
+  grid-column: auto; /* don't span full width */
+  padding: 0; /* let .project-info handle internal padding */
 }
 
 .featured-project .project-image {
+  /* make featured card image visually match compact project cards */
   position: relative;
-  height: 400px;
+  height: 140px; /* same as other project cards */
+  max-height: 200px;
   overflow: hidden;
-  border-radius: 8px 8px 0 0;
-  border: 1px solid rgba(110, 69, 226, 0.2);
+  border-radius: var(--border-radius);
+  border: none;
+  margin: 0 18px 0 18px; /* keep some inner spacing so image doesn't touch card edges */
 }
 
 .project-screenshot {
@@ -317,16 +343,22 @@ p {
 }
 
 @media (min-width: 768px) {
+
   .featured-project {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 2rem;
-    padding: 2rem;
+    /* keep featured project layout consistent with other cards on wider screens */
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    align-items: stretch;
   }
 
   .featured-project .project-image {
-    height: 100%;
-    border-radius: 8px;
+    /* same image sizing as other cards */
+    height: 140px;
+    border-radius: var(--border-radius);
+    margin: 0;
+    overflow: hidden;
   }
 
   .featured-project .project-info {
@@ -373,13 +405,16 @@ p {
   display: flex;
   flex-direction: column;
   min-height: 220px; /* compact card height */
-  max-width: 300px; /* fixed compact width */
+  height: 100%; /* make card fill its grid cell */
   width: 100%;
+  /* remove hard max-width to keep grid consistent across breakpoints */
 }
 
 .project-card .project-image {
   flex: 0 0 auto;
   height: 140px; /* image height tuned to your requested compact look */
+  max-height: 200px; /* prevent an oversized source from expanding the card */
+  overflow: hidden;
 }
 
 .project-card .project-image img,
@@ -391,12 +426,34 @@ p {
   object-fit: cover; /* keep aspect and cover area */
 }
 
+/* Ensure screenshot images in project root or images/ are visible and constrained */
+.project-image > img.project-screenshot {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* If a source image inside images/ is huge, downscale it visually and limit its intrinsic size */
+.project-image img[ src$="image.png" ],
+.project-image img[alt*="CYBERSHIELD"],
+.project-screenshot {
+  max-width: 100%;
+  max-height: 200px;
+}
+
 .project-card .project-info {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 18px;
+}
+
+.featured-project .project-info {
+  padding: 18px; /* same padding for consistent internal layout */
 }
 
 /* keep title/description compact to enforce uniform card heights */
@@ -417,20 +474,20 @@ p {
   justify-content: flex-start;
 }
 
-/* Make featured project image match card height on smaller screens */
+/* Make featured project use compact card sizing like other project cards */
 .featured-project .project-image {
-  min-height: 220px;
+  min-height: 140px;
+  max-height: 200px;
 }
 
-/* featured project should span full width, override compact card sizing */
 .featured-project {
   max-width: 100%;
   width: 100%;
-  min-height: 360px;
+  min-height: auto; /* allow content to flow naturally */
 }
 
 .featured-project .project-image {
-  height: 320px;
+  height: 140px;
 }
 
 @media (max-width: 768px) {
@@ -446,6 +503,16 @@ p {
   right: 0;
   bottom: 0;
   background: linear-gradient(to top, rgba(15, 12, 26, 0.8), transparent);
+}
+
+/* Cap any image inside featured project to avoid overflow past menus */
+.featured-project img.project-screenshot,
+.project-card img.project-screenshot {
+  max-height: 200px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* project info layout and compact sizing */
@@ -579,6 +646,84 @@ footer {
   font-weight: 500;
   opacity: 0.8;
 }
+
+/* Improved footer layout: divider, spacing and responsive typography */
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  margin: 18px 0;
+  border-radius: 2px;
+}
+
+.copyright {
+  color: var(--gray);
+  font-size: 0.95rem;
+  margin: 6px 0 0;
+}
+
+.trademark {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.9rem;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* make the RAM logo and signature aligned nicely */
+.ram-signature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 6px;
+}
+
+.ram-logo {
+  font-size: 1.8rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .copyright { font-size: 0.9rem; }
+  .trademark { font-size: 0.85rem; }
+  .download-btn { padding: 10px 18px; }
+}
+
+/* Professional two-column footer layout */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: center;
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+/* Responsive: stack the footer columns on small screens */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .footer-right { text-align: center; }
+  .footer-left { text-align: center; }
+}
+
+/* RTL support */
+[dir="rtl"] .footer-left { text-align: right; }
+[dir="rtl"] .footer-right { text-align: left; }
 
 /* RTL Support */
 [dir="rtl"] {
@@ -767,23 +912,7 @@ footer {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--darker);
-}
-
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(var(--primary), var(--accent));
   border-radius: 4px;
-}
-.featured-project .project-image {
-  height: 280px !important;
-  width: 100% !important;
-  overflow: hidden;
-}
-
-.featured-project .project-image img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block;
 }

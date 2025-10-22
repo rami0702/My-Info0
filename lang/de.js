@@ -55,3 +55,40 @@ const de = {
     copyright: "Alle Rechte vorbehalten",
     allRightsReserved: "Alle Rechte vorbehalten"
 };
+
+// Expose to window so setLanguage can access reliably
+window.de = de;
+// Additional German keys
+Object.assign(window.de, {
+    skill_html_css: 'HTML5 & CSS3',
+    skill_js: 'JavaScript (ES6+)',
+    skill_react: 'React.js',
+    skill_vue: 'Vue.js',
+    skill_responsive: 'Responsives Design',
+    skill_node: 'Node.js',
+    skill_python: 'Python',
+    skill_php: 'PHP',
+    skill_mysql_mongo: 'MySQL / MongoDB',
+    skill_rest: 'RESTful APIs',
+    skill_unity: 'Unity (C#)',
+    skill_unreal: 'Unreal Engine',
+    skill_lua: 'Lua (Love2D)',
+    skill_game_design: 'Spieldesign',
+    skill_3d: '3D-Modellierung',
+    skill_git: 'Git & GitHub',
+    skill_docker: 'Docker',
+    skill_figma: 'Figma / Adobe XD',
+    skill_blender: 'Blender',
+    skill_cicd: 'CI/CD-Pipelines',
+    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 ECHTZEIT',
+    demo_threats_label: 'Erkannte Bedrohungen:',
+    demo_processes_label: 'Aktive Prozesse:',
+    demo_files_label: 'Gescannt Dateien:',
+    demo_status_label: 'Status:',
+    statusReady: 'Bereit',
+    quickScanLabel: 'Schnellscan',
+    deepAnalysisLabel: 'Tiefe Analyse',
+    customHuntLabel: 'Benutzerdefinierte Suche',
+    nuclearLabel: 'Nukleare Reinigung',
+    guardianLabel: 'Echtzeit-Wächter'
+});

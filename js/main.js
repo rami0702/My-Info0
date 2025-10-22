@@ -52,15 +52,65 @@ function setLanguage(lang) {
     
     // Update all text content based on language
     const texts = window[lang];
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (texts[key]) {
-            if (element.tagName === 'INPUT' && element.type === 'submit') {
-                element.value = texts[key];
+    if (!texts) {
+        console.warn(`Language pack for '${lang}' not found.`);
+        return;
+    }
+
+    // Helper to set element text or value safely
+    const applyText = (el, value) => {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            if (el.type === 'submit' || el.type === 'button') el.value = value;
+            else el.placeholder = value;
+        } else if (el.tagName === 'IMG') {
+            // set alt and title if provided
+            if (el.hasAttribute('data-i18n')) el.alt = value;
+            else el.title = value;
+        } else {
+            // If the element has no child ELEMENT nodes, it's safe to replace its text.
+            // Using el.children.length avoids issues where whitespace creates extra text nodes.
+            if (el.children.length === 0) {
+                el.textContent = value;
             } else {
-                element.textContent = texts[key];
+                // If the element contains child elements, avoid clobbering them.
+                // Store a rendered value that can be used by CSS/ARIA consumers if needed.
+                el.dataset.i18nRendered = value;
             }
         }
+    };
+
+    // Apply to elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (key && (key in texts)) {
+            applyText(element, texts[key]);
+        }
+    });
+
+    // Support translating attributes via data-i18n-attr="attrName:key"
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+        // multiple mappings separated by semicolons: attr:langKey;attr2:langKey2
+        const mappings = el.getAttribute('data-i18n-attr').split(';').map(s => s.trim()).filter(Boolean);
+        mappings.forEach(map => {
+            const [attr, k] = map.split(':').map(s => s.trim());
+            if (attr && k && (k in texts)) {
+                el.setAttribute(attr, texts[k]);
+            }
+        });
+    });
+
+    // Update placeholders on inputs with data-i18n-placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (key in texts) el.placeholder = texts[key];
+    });
+
+    // Update images alt/title by data-i18n-alt or data-i18n-title
+    document.querySelectorAll('img[data-i18n-alt], img[data-i18n-title]').forEach(img => {
+        const altKey = img.getAttribute('data-i18n-alt');
+        const titleKey = img.getAttribute('data-i18n-title');
+        if (altKey && altKey in texts) img.alt = texts[altKey];
+        if (titleKey && titleKey in texts) img.title = texts[titleKey];
     });
 
     // Update active state of language buttons
