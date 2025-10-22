@@ -775,3 +775,15 @@ footer {
   background: linear-gradient(var(--primary), var(--accent));
   border-radius: 4px;
 }
+.featured-project .project-image {
+  height: 280px !important;
+  width: 100% !important;
+  overflow: hidden;
+}
+
+.featured-project .project-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
