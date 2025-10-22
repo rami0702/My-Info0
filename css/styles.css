@@ -133,22 +133,11 @@ main {
 
 section {
   margin-bottom: 80px;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s forwards;
+  opacity: 1;
+  transform: none;
+  display: block;
+  visibility: visible;
 }
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-section:nth-child(1) { animation-delay: 0.2s; }
-section:nth-child(2) { animation-delay: 0.4s; }
-section:nth-child(3) { animation-delay: 0.6s; }
-section:nth-child(4) { animation-delay: 0.8s; }
 
 h2 {
   font-size: 2.5rem;
@@ -189,13 +178,16 @@ p {
   padding: 25px;
   border-radius: var(--border-radius);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
 }
 
 .skill-category:hover {
-  transform: translateY(-5px);
-  border-color: rgba(110, 69, 226, 0.3);
+  border-color: var(--primary);
+  box-shadow: 0 6px 12px rgba(110, 69, 226, 0.2);
 }
 
 .skill-category h3 {
@@ -209,14 +201,19 @@ p {
 
 .skill-category ul {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .skill-category li {
   position: relative;
   padding-left: 25px;
-  margin-bottom: 12px;
   color: var(--light);
   transition: var(--transition);
+  min-height: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .skill-category li:hover {
@@ -356,6 +353,9 @@ p {
   background-size: cover;
   background-position: center;
   position: relative;
+  aspect-ratio: 16/9;
+  width: 100%;
+  object-fit: cover;
 }
 
 .project-image::after {
@@ -439,6 +439,7 @@ footer {
   padding: 60px 5% 40px;
   position: relative;
   z-index: 2;
+  background: linear-gradient(to bottom, transparent, var(--darker));
 }
 
 .social-links {
@@ -459,9 +460,35 @@ footer {
   transform: translateY(-3px);
 }
 
+.ram-signature {
+  margin: 20px 0;
+}
+
+.ram-logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(110, 69, 226, 0.5);
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.ram-logo i {
+  color: var(--accent);
+  margin-right: 10px;
+}
+
 .copyright {
   color: var(--gray);
   font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.trademark {
+  color: var(--gray);
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.8;
 }
 
 /* RTL Support */
