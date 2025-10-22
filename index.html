@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RAM CYBER DEFENSE - Advanced Cybersecurity Solutions">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="RAM CYBER DEFENSE">
+  <meta name="keywords" content="cybersecurity, security tools, cyber defense, RAM security, threat detection, security suite">
+  <title>RAM CYBER DEFENSE – Advanced Security Solutions</title>
+  
+  <!-- Preload Resources -->
+  <link rel="preload" href="images/image.png" as="image">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Language Files - Load before main script -->
+  <script src="lang/ar.js"></script>
+  <script src="lang/en.js"></script>
+  <script src="lang/de.js"></script>
+  
+  <!-- Core Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.24.0/dist/globe.gl.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+<!-- Animated Globe Background -->
+<div id="globeContainer"></div>
+
+<!-- Language Switcher -->
+<div class="lang-switcher">
+  <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">عربي</button>
+  <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+  <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">DE</button>
+</div>
+
+<!-- Header Section -->
+<header>
+  <div class="header-content">
+    <h1 data-i18n="title">RAM Security</h1>
+    <p class="subtitle" data-i18n="subtitle">Creative Developer & Digital Designer</p>
+    <a href="mailto:ramemaher9@gmail.com" class="contact-btn">
+      <i class="fas fa-envelope"></i> <span data-i18n="contactMe">Contact Me</span>
+    </a>
+  </div>
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span data-i18n="scrollDown">Scrollen Sie nach unten</span>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- About Section -->
+    <section id="about">
+      <h2>Über Mich</h2>
+      <p>
+        Ich bin ein leidenschaftlicher Entwickler mit Fokus auf die Erstellung außergewöhnlicher digitaler Erlebnisse. Mit mehreren Jahren Erfahrung in verschiedenen Technologien verbinde ich technische Expertise mit kreativem Design.
+      </p>
+      <p>
+        Meine Reise begann mit einfachen Skripten und hat sich zu komplexen Anwendungen, interaktiven Webseiten und immersiven Spielen entwickelt. Ich liebe es, Probleme zu lösen und schöne, funktionale Lösungen zu schaffen.
+      </p>
+      <p>
+      Zusätzlich habe ich meine technischen Programmierfähigkeiten kontinuierlich weiterentwickelt und mich in mehreren Programmiersprachen vertieft. Ich habe mich selbst herausgefordert, indem ich komplexe Projekte umgesetzt habe, die normalerweise ein großes Team in einem Unternehmen erfordern würden. Eines meiner bedeutendsten Projekte war die Entwicklung eines Sicherheitssystems zum Schutz vor Datendiebstahl über QR-Codes. Dieses System erkennt und verhindert unautorisierte Zugriffe auf Smartphone-Daten und trägt somit aktiv zum Schutz der Privatsphäre der Nutzer bei. 
+     </p>
+     <p>
+      Ich arbeite seit über 15 Jahren intensiv mit Computern und verfüge über umfassende Erfahrung im Bereich Hardware. Darüber hinaus habe ich einen eigenen Server für den Fernzugriff entwickelt, ähnlich wie bei Remote Desktop, den ich durch selbst programmierte Anwendungen erweitert habe. Diese ermöglichen mir, sicher und effizient auf Geräte und Systeme in meinem privaten Netzwerk zuzugreifen.  
+    </section>
+
+    <!-- Expertise Showcase -->
+    <section id="expertise" class="expertise-section">
+      <div class="expertise-grid">
+        <div class="expertise-card gamer">
+          <i class="fas fa-gamepad"></i>
+          <h3 data-i18n="expertiseGamer">Veteran Gamer</h3>
+          <p data-i18n="expertiseGamerDesc">Passionate about gaming technology and performance optimization</p>
+        </div>
+        
+        <div class="expertise-card server">
+          <i class="fas fa-server"></i>
+          <h3 data-i18n="expertiseServer">Server Dev</h3>
+          <p data-i18n="expertiseServerDesc">Building and optimizing high-performance server infrastructure</p>
+        </div>
+        
+        <div class="expertise-card code">
+          <i class="fas fa-code"></i>
+          <h3 data-i18n="expertiseCode">Code Crafter</h3>
+          <p data-i18n="expertiseCodeDesc">Crafting elegant solutions for complex technical challenges</p>
+        </div>
+        
+        <div class="expertise-card network">
+          <i class="fas fa-network-wired"></i>
+          <h3 data-i18n="expertiseNetwork">Network Architect</h3>
+          <p data-i18n="expertiseNetworkDesc">Designing robust and secure network infrastructures</p>
+        </div>
+        
+        <div class="expertise-card automation">
+          <i class="fas fa-robot"></i>
+          <h3 data-i18n="expertiseAutomation">Automation Expert</h3>
+          <p data-i18n="expertiseAutomationDesc">Optimizing gameplay and server performance through automation</p>
+        </div>
+        
+        <div class="expertise-card data">
+          <i class="fas fa-chart-line"></i>
+          <h3 data-i18n="expertiseData">Data Driven</h3>
+          <p data-i18n="expertiseDataDesc">Using data analytics for performance optimization and bug hunting</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2>Fähigkeiten & Technologien</h2>
+      <div class="skills-container">
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Frontend</h3>
+          <ul>
+            <li>HTML5 & CSS3</li>
+            <li>JavaScript (ES6+)</li>
+            <li>React.js</li>
+            <li>Vue.js</li>
+            <li>Responsive Design</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-server"></i> Backend</h3>
+          <ul>
+            <li>Node.js</li>
+            <li>Python</li>
+            <li>PHP</li>
+            <li>MySQL/MongoDB</li>
+            <li>RESTful APIs</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-gamepad"></i> Spieleentwicklung</h3>
+          <ul>
+            <li>Unity (C#)</li>
+            <li>Unreal Engine</li>
+            <li>Lua (Love2D)</li>
+            <li>Game Design</li>
+            <li>3D Modeling</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3><i class="fas fa-tools"></i> Tools & Sonstiges</h3>
+          <ul>
+            <li>Git & GitHub</li>
+            <li>Docker</li>
+            <li>Figma/Adobe XD</li>
+            <li>Blender</li>
+            <li>CI/CD Pipelines</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Meine Projekte</h2>
+      <p>
+        Hier finden Sie eine Auswahl meiner jüngsten Arbeiten. Jedes Projekt stellt eine einzigartige Herausforderung dar und zeigt meine Fähigkeiten in verschiedenen Bereichen.
+      </p>
+      <div class="projects-grid">
+        <!-- RAM Security Elite Project -->
+        <div class="project-card featured-project">
+          <div class="project-image">
+            <img src="images/image.png" 
+                 alt="CYBERSHIELD ELITE SECURITY SUITE Interface" 
+                 class="project-screenshot">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="ramSecurityTitle">RAM CYBER DEFENSE Elite</h3>
+            <p class="project-desc" data-i18n="ramSecurityDesc">
+              أداة أمان متقدمة مع واجهة PowerShell للكشف عن التهديدات وإزالتها. تركز على حماية البيانات وتعزيز الوعي الأمني.
+              • كشف وإزالة البرمجيات الخبيثة
+              • حماية متقدمة من التهديدات
+              • تحديثات تلقائية للأمان
+              • واجهة مستخدم احترافية
+            </p>
+            <div class="project-links">
+              <a href="javascript:void(0)" onclick="showDemo()" class="project-link">
+                <i class="fas fa-play-circle"></i> <span data-i18n="viewDemo">عرض تجريبي</span>
+              </a>
+              <a href="https://github.com/rami0702/RAM-CYBER-DEFENSE/blob/main/downloads/RAM%20Security%20Elite.ps1" 
+                 target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="viewCode">عرض الكود</span>
+              </a>
+            </div>
+            <a href="downloads/RAM Security Elite.ps1" class="download-btn" download>
+              <i class="fas fa-download"></i> <span data-i18n="downloadText">تحميل النسخة الاحترافية v4.0</span>
+            </a>
+            <div style="text-align: center; margin-top: 10px; color: var(--accent);" data-i18n="scriptVersion">PowerShell Edition v4.0</div>
+          </div>
+        </div>
+        
+        <!-- Analytics Dashboard -->
+        <div class="project-card">
+          <div class="project-image" style="background-image: url('https://source.unsplash.com/random/600x400/?dashboard')">
+            <img src="https://raw.githubusercontent.com/rami0702/My-Info/main/bc2f6e19-b3f2-4e31-8521-e39a3e6d3297.png" 
+                 alt="صورة شخصية" 
+                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="dashboardTitle">لوحة التحليلات</h3>
+            <p class="project-desc" data-i18n="dashboardDesc">
+              لوحة تحكم تفاعلية لتحليل البيانات في الوقت الفعلي وعرضها بشكل مرئي.
+            </p>
+            <div class="project-links">
+              <a href="https://rami0702.github.io/ki0sk-yusuf/dashboard.html" target="_blank" class="project-link">
+                <i class="fas fa-eye"></i> <span data-i18n="viewDemo">عرض تجريبي</span>
+              </a>
+              <a href="https://github.com/rami0702/ki0sk-yusuf" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="viewCode">عرض الكود</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Kontakt</h2>
+  <p>
+    Haben Sie ein interessantes Projekt oder möchten Sie zusammenarbeiten? Ich freue mich darauf, von Ihnen zu hören!
+  </p>
+  <a href="mailto:ramemaher9@gmail.com" class="contact-btn" style="margin-top: 20px;">
+    <i class="fas fa-paper-plane"></i> Nachricht senden
+  </a>
+</section>
+
+  <!-- Demo Modal -->
+  <div class="demo-overlay"></div>
+  <div class="demo-modal">
+    <div class="demo-modal-header">
+      <h3 class="demo-modal-title">CYBERSHIELD ELITE SECURITY SUITE v4.0 REAL-TIME</h3>
+      <button class="close-demo">&times;</button>
+    </div>
+    
+    <div class="demo-stats">
+      <div class="stat-item threats">Threats Detected: <span class="threats-count">0</span></div>
+      <div class="stat-item processes">Active Processes: <span class="process-count">210</span></div>
+      <div class="stat-item files">Files Scanned: <span class="files-count">0</span></div>
+      <div class="stat-item status">Status: <span class="status-text">Ready</span></div>
+    </div>
+
+    <div class="demo-actions">
+      <button class="demo-button quick-scan">🔍 Quick System Scan</button>
+      <button class="demo-button deep-analysis">🔬 Deep Threat Analysis</button>
+      <button class="demo-button custom-hunt">🎯 Custom Threat Hunt</button>
+      <button class="demo-button nuclear">☢️ Nuclear Cleanse</button>
+      <button class="demo-button guardian">🛡️ Real-Time Guardian</button>
+    </div>
+
+    <div class="demo-results"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-links">
+      <a href="https://github.com/rami0702" class="social-link" title="GitHub" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <p class="copyright">
+      &copy; <span id="currentYear"></span> RAM CYBER DEFENSE. <span data-i18n="allRightsReserved">All Rights Reserved</span>
+    </p>
+  </footer>
+
+  <!-- Main Script -->
+  <script src="js/main.js"></script>
+  
+  <!-- Dynamic Year Script -->
+  <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
