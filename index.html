@@ -36,6 +36,17 @@
 <!-- Animated Globe Background -->
 <div id="globeContainer"></div>
 
+<!-- Top-left compact navigation (interactive) -->
+<nav id="topNav" aria-label="Primary navigation">
+  <ul>
+    <li><a href="#about" data-globe-lat="24.7136" data-globe-lng="46.6753">About</a></li>
+    <li><a href="#projects" data-globe-lat="40.7128" data-globe-lng="-74.0060">Projects</a></li>
+    <li><a href="#skills" data-globe-lat="51.5074" data-globe-lng="-0.1278">Skills</a></li>
+    <li><a href="#expertise" data-globe-lat="35.6762" data-globe-lng="139.6503">Expertise</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
 <!-- Language Switcher -->
 <div class="lang-switcher">
   <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">عربي</button>
@@ -272,7 +283,10 @@
         </div>
 
         <div class="footer-right">
-          <p class="trademark" data-i18n="trademarkText">RAM™ - جميع الحقوق محفوظة | تم التطوير بواسطة فريق RAM</p>
+          <p class="trademark">
+            <span data-i18n="trademarkText_line1">RAM™ - جميع الحقوق محفوظة</span><br>
+            <span data-i18n="trademarkText_line2">تم التطوير بواسطة فريق RAM</span>
+          </p>
           <div class="social-links">
             <a href="https://github.com/rami0702" class="social-link" title="GitHub" target="_blank">
               <i class="fab fa-github"></i>
