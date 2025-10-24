@@ -56,6 +56,19 @@ const en = {
     allRightsReserved: "All Rights Reserved"
 };
 
+// Missing project and UI keys
+Object.assign(en, {
+    ramSecurityTitle: 'RAM CYBER DEFENSE Elite',
+    ramSecurityDesc: 'An advanced security tool with a PowerShell interface for threat detection and removal. Focused on data protection and security awareness.',
+    downloadText: 'Download Professional Edition v4.0',
+    scriptVersion: 'PowerShell Edition v4.0',
+    dashboardTitle: 'Analytics Dashboard',
+    dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
+    trademarkText: 'RAM™ - All rights reserved | Developed by the RAM team',
+    trademarkText_line1: 'RAM™ - All rights reserved',
+    trademarkText_line2: 'Developed by the RAM team'
+});
+
 // Expose to window so setLanguage can access reliably
 window.en = en;
 // Additional keys added by patch
