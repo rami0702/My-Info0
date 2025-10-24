@@ -285,8 +285,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize language
     setLanguage(currentLang);
     
-    // Initialize globe
-    initGlobe();
+    // Initialize globe with safe fallback.
+    try {
+        if (typeof Globe === 'function') {
+            initGlobe();
+        } else {
+            // Globe library not available, use basic three.js fallback
+            console.warn('Globe() not available, falling back to basic globe.');
+            initGlobeBasic();
+        }
+    } catch (err) {
+        console.warn('initGlobe failed, falling back to basic globe:', err);
+        try {
+            initGlobeBasic();
+        } catch (err2) {
+            console.error('Both globe initializers failed:', err2);
+        }
+    }
     
     // Setup smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -297,7 +312,48 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    // Top-left nav: click to smooth-scroll and focus globe if possible
+    const topNavLinks = document.querySelectorAll('#topNav a');
+    topNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href && document.querySelector(href)) {
+                document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+            }
 
+            // If globe is initialized and supports pointOfView, fly to given lat/lng
+            const lat = parseFloat(this.getAttribute('data-globe-lat'));
+            const lng = parseFloat(this.getAttribute('data-globe-lng'));
+            try {
+                if (typeof globe !== 'undefined' && typeof globe.pointOfView === 'function' && !isNaN(lat) && !isNaN(lng)) {
+                    // use a short animation to move the globe camera
+                    globe.pointOfView({ lat, lng, altitude: 1.5 }, 1000);
+                }
+            } catch (err) {
+                // ignore if globe API isn't available yet
+            }
+        });
+    });
+
+    // Highlight active section in top-left nav on scroll
+    const sectionsForNav = document.querySelectorAll('section, header');
+    const setActiveNav = () => {
+        let currentId = null;
+        sectionsForNav.forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.35 && rect.bottom >= window.innerHeight * 0.2) {
+                currentId = sec.id || 'about';
+            }
+        });
+        topNavLinks.forEach(a => {
+            const href = a.getAttribute('href');
+            a.classList.toggle('active', href === `#${currentId}`);
+        });
+    };
+    window.addEventListener('scroll', setActiveNav);
+    setActiveNav();
+    
     // Setup scroll animations
     const animateOnScroll = () => {
         const sections = document.querySelectorAll('section');
