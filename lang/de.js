@@ -92,3 +92,16 @@ Object.assign(window.de, {
     nuclearLabel: 'Nukleare Reinigung',
     guardianLabel: 'Echtzeit-Wächter'
 });
+
+// Add missing project/UI keys
+Object.assign(de, {
+    ramSecurityTitle: 'RAM CYBER DEFENSE Elite',
+    ramSecurityDesc: 'Ein fortschrittliches Sicherheitstool mit PowerShell-Oberfläche zur Erkennung und Entfernung von Bedrohungen. Fokus auf Datenschutz und Sicherheitsbewusstsein.',
+    downloadText: 'Professionelle Version herunterladen v4.0',
+    scriptVersion: 'PowerShell Edition v4.0',
+    dashboardTitle: 'Analytics Dashboard',
+    dashboardDesc: 'Ein interaktives Dashboard zur Echtzeitanalyse und Visualisierung von Daten.',
+    trademarkText: 'RAM™ - Alle Rechte vorbehalten | Entwickelt vom RAM-Team',
+    trademarkText_line1: 'RAM™ - Alle Rechte vorbehalten',
+    trademarkText_line2: 'Entwickelt vom RAM-Team'
+});
