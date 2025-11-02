@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator & Scanner</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .qr-demo-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: var(--card-bg);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(110,69,226,0.12);
+      padding: 32px 24px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    .qr-demo-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: var(--primary);
+    }
+    .qr-demo-desc {
+      color: var(--gray);
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+    .qr-input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--primary);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .qr-btn {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 18px;
+      transition: background 0.3s;
+    }
+    .qr-btn:hover {
+      background: linear-gradient(45deg, var(--accent), var(--primary));
+    }
+    #qrcode {
+      margin: 18px auto;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(110,69,226,0.08);
+      display: inline-block;
+    }
+    .qr-scan-section {
+      margin-top: 32px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    #qr-reader {
+      width: 100%;
+      margin: 0 auto;
+    }
+    .qr-result {
+      margin-top: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      word-break: break-all;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
+</head>
+<body>
+  <div class="qr-demo-container">
+    <div class="qr-demo-title">QR Code Generator & Scanner</div>
+    <div class="qr-demo-desc">أنشئ رمز QR لأي نص أو رابط، أو امسح رمز QR مباشرة من الكاميرا أو صورة.</div>
+    <input type="text" id="qrText" class="qr-input" placeholder="أدخل نص أو رابط هنا...">
+    <button class="qr-btn" onclick="generateQR()"><i class="fas fa-qrcode"></i> إنشاء رمز QR</button>
+    <div id="qrcode"></div>
+    <hr style="margin: 32px 0;">
+    <div class="qr-scan-section">
+      <div style="font-weight:600; margin-bottom:10px;">مسح رمز QR بالكاميرا</div>
+      <div id="qr-reader" style="margin-bottom:10px;"></div>
+      <div class="qr-result" id="qrResult"></div>
+      <button class="qr-btn" onclick="startScanner()"><i class="fas fa-camera"></i> بدء المسح</button>
+      <button class="qr-btn" onclick="stopScanner()" style="background:#ff7e5f; margin-left:8px;"><i class="fas fa-stop"></i> إيقاف المسح</button>
+    </div>
+  </div>
+  <script>
+    // QR Code Generation
+    function generateQR() {
+      var qrText = document.getElementById('qrText').value.trim();
+      var qrDiv = document.getElementById('qrcode');
+      qrDiv.innerHTML = '';
+      if (qrText) {
+        new QRCode(qrDiv, {
+          text: qrText,
+          width: 180,
+          height: 180,
+          colorDark: '#000000',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    }
+    // QR Code Scanning
+    let qrScanner;
+    function startScanner() {
+      if (!qrScanner) {
+        qrScanner = new Html5Qrcode("qr-reader");
+      }
+      qrScanner.start({ facingMode: "environment" }, {
+        fps: 10,
+        qrbox: 200
+      }, qrCodeMessage => {
+        document.getElementById('qrResult').textContent = 'تم المسح: ' + qrCodeMessage;
+        stopScanner();
+      }, error => {
+        // ignore errors
+      });
+    }
+    function stopScanner() {
+      if (qrScanner) {
+        qrScanner.stop().then(() => {
+          qrScanner.clear();
+        });
+      }
+    }
+  </script>
+</body>
+</html>
