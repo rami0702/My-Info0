@@ -112,5 +112,9 @@ Object.assign(de, {
     stat_experience_value: '+15',
     stat_experience_label: 'Jahre Erfahrung',
     stat_projects_value: '+150',
-    stat_projects_label: 'Abgeschlossene Projekte'
+    stat_projects_label: 'Abgeschlossene Projekte',
+    
+    // Visitor Stats
+    total_visitors: 'Gesamtbesucher',
+    live_visitors: 'Jetzt Online'
 });
