@@ -22,6 +22,9 @@
   <script src="lang/ar.js"></script>
   <script src="lang/en.js"></script>
   <script src="lang/de.js"></script>
+  <!-- QR Code Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
   
   <!-- Core Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
@@ -319,26 +322,45 @@
         </div>
 
         <!-- QR Code Generator Project -->
-        <div class="project-card">
-          <div class="project-image">
-            <img src="images/qr-demo-preview.png" alt="QR Code Generator Demo" class="project-screenshot">
-          </div>
-          <div class="project-info">
-            <h3 class="project-title" data-i18n="qrProjectTitle">QR Code Generator & Scanner</h3>
-            <p class="project-desc" data-i18n="qrProjectDesc">
-              مولد ومسح رموز QR احترافي يعمل بالكامل على المتصفح. أنشئ رمز QR لأي نص أو رابط، وامسح الرموز مباشرة من الكاميرا أو صورة بدون أي إعدادات أو تسجيل.
-            </p>
-            <div class="project-links">
-              <a href="qr-project/qr-demo.html" target="_blank" class="project-link">
-                <i class="fas fa-qrcode"></i> <span data-i18n="qrTry">تجربة مباشرة</span>
-              </a>
-              <a href="https://github.com/rami0702/qr" target="_blank" class="project-link">
-                <i class="fab fa-github"></i> <span data-i18n="qrCodeLib">الكود والمكتبة</span>
-              </a>
+          <div class="project-card">
+            <div class="project-image">
+              <img src="images/qr-demo-preview.png" alt="QR Code Generator Demo" class="project-screenshot">
+            </div>
+            <div class="project-info">
+              <h3 class="project-title" data-i18n="qrProjectTitle">QR Code Generator & Scanner</h3>
+              <p class="project-desc" data-i18n="qrProjectDesc">
+                مولد ومسح رموز QR احترافي يعمل بالكامل على المتصفح. أنشئ رمز QR لأي نص أو رابط، وامسح الرموز مباشرة من الكاميرا أو صورة بدون أي إعدادات أو تسجيل.
+              </p>
+              <div class="project-links">
+                <a href="javascript:void(0)" onclick="showQRModal()" class="project-link">
+                  <span data-i18n="qrTry">Live Demo</span> <i class="fas fa-qrcode"></i>
+                </a>
+                <a href="https://github.com/rami0702/qr" target="_blank" class="project-link">
+                  <span data-i18n="qrCodeLib">الكود والمكتبة</span> <i class="fab fa-github"></i>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        <!-- Image Compressor & Optimizer Project -->
+      <div class="project-card">
+      <div class="project-image">
+  <img src="images/image-compressor-card.png" class="project-screenshot" data-i18n-alt="imgCompressorImageAlt" alt="Image Compressor Demo">
+          </div>
+          <div class="project-info">
+           <h3 class="project-title" data-i18n="imgCompressorTitle">Image Compressor & Optimizer</h3>
+           <p class="project-desc" data-i18n="imgCompressorDesc">
+       أداة لضغط وتحسين الصور مباشرة من المتصفح، تدعم السحب والإفلات، وتعرض حجم الصورة قبل وبعد الضغط، مع إمكانية تحميل الصورة المضغوطة.
+           </p>
+            <div class="project-links">
+      <a href="javascript:void(0)" onclick="showImgCompressorModal()" class="project-link">
+        <i class="fas fa-play-circle"></i> <span data-i18n="imgCompressorTry">تجربة مباشرة</span>
+      </a>
+      <a href="https://github.com/rami0702/image-compressor" target="_blank" class="project-link">
+        <i class="fab fa-github"></i> <span data-i18n="imgCompressorCode">عرض الكود</span>
+      </a>
+    </div>
+  </div>
+</div>
     </section>
 
 <!-- Contact Section -->
@@ -351,7 +373,7 @@
 </section>
 
   <!-- Demo Modal -->
-  <div class="demo-overlay"></div>
+  <div class="demo-overlay" onclick="closeAllModals()"></div>
   <div class="demo-modal">
           <div class="demo-modal-header">
       <h3 class="demo-modal-title" data-i18n="demoTitle">CYBERSHIELD ELITE SECURITY SUITE v4.0 REAL-TIME</h3>
@@ -375,6 +397,419 @@
 
     <div class="demo-results"></div>
   </div>
+
+  <!-- QR & Image Compressor Modals Logic -->
+  <script>
+  (function() {
+    const overlay = document.querySelector('.demo-overlay');
+    let qrScannerModal = null;
+    let qrScannerInline = null;
+    let imgOriginalFile = null;
+    let imgCompressedBlobUrl = null;
+    let imgPreviewUrl = null;
+
+    const IMG_MAX_WIDTH = 800;
+    const IMG_MAX_HEIGHT = 800;
+    const IMG_QUALITY = 0.6;
+
+    function getLanguagePack() {
+      const lang = (typeof currentLang !== 'undefined' && currentLang) || localStorage.getItem('preferredLanguage') || 'ar';
+      return {
+        lang,
+        pack: window[lang] || window.ar || {}
+      };
+    }
+
+    function setPlaceholder(elementId) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      const placeholderKey = element.getAttribute('data-placeholder-key');
+      const { pack } = getLanguagePack();
+      if (placeholderKey && pack[placeholderKey]) {
+        element.innerHTML = `<span data-i18n="${placeholderKey}">${pack[placeholderKey]}</span>`;
+      } else if (placeholderKey) {
+        element.innerHTML = `<span data-i18n="${placeholderKey}">${element.dataset.placeholderFallback || ''}</span>`;
+      } else {
+        element.innerHTML = '';
+      }
+    }
+
+    function toggleOverlay(show) {
+      if (!overlay) return;
+      overlay.style.display = show ? 'block' : 'none';
+      overlay.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
+
+    function resetImgCompressor() {
+      const input = document.getElementById('imgInput');
+      const download = document.getElementById('imgDownload');
+      const dropzone = document.getElementById('imgDropzone');
+
+      if (imgCompressedBlobUrl) {
+        URL.revokeObjectURL(imgCompressedBlobUrl);
+        imgCompressedBlobUrl = null;
+      }
+      if (imgPreviewUrl) {
+        URL.revokeObjectURL(imgPreviewUrl);
+        imgPreviewUrl = null;
+      }
+
+      imgOriginalFile = null;
+
+      if (input) input.value = '';
+      if (download) download.innerHTML = '';
+      if (dropzone) dropzone.classList.remove('drag-active');
+
+      setPlaceholder('imgPreview');
+      setPlaceholder('imgResult');
+    }
+
+    function handleImageFile(file) {
+      const { pack } = getLanguagePack();
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        alert(pack.imgInvalidFile || 'Please upload a valid image file.');
+        return;
+      }
+
+      imgOriginalFile = file;
+
+      if (imgPreviewUrl) {
+        URL.revokeObjectURL(imgPreviewUrl);
+      }
+      imgPreviewUrl = URL.createObjectURL(file);
+
+      const preview = document.getElementById('imgPreview');
+      if (preview) {
+        preview.innerHTML = `<img src="${imgPreviewUrl}" alt="Preview" class="img-preview-thumb">`;
+      }
+
+      const result = document.getElementById('imgResult');
+      if (result) result.innerHTML = '';
+
+      const download = document.getElementById('imgDownload');
+      if (download) download.innerHTML = '';
+    }
+
+    function compressActiveImage() {
+      const { pack } = getLanguagePack();
+      const input = document.getElementById('imgInput');
+      const file = imgOriginalFile || (input ? input.files[0] : null);
+
+      if (!file) {
+        alert(pack.imgSelectPrompt || 'Please choose an image first.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = new Image();
+        img.onload = function() {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > IMG_MAX_WIDTH) {
+            height *= IMG_MAX_WIDTH / width;
+            width = IMG_MAX_WIDTH;
+          }
+          if (height > IMG_MAX_HEIGHT) {
+            width *= IMG_MAX_HEIGHT / height;
+            height = IMG_MAX_HEIGHT;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob(function(blob) {
+            if (!blob) {
+              alert(pack.imgCompressionError || 'Unable to compress this image.');
+              return;
+            }
+
+            if (imgCompressedBlobUrl) {
+              URL.revokeObjectURL(imgCompressedBlobUrl);
+            }
+            imgCompressedBlobUrl = URL.createObjectURL(blob);
+
+            const beforeKb = (file.size / 1024).toFixed(1);
+            const afterKb = (blob.size / 1024).toFixed(1);
+
+            const result = document.getElementById('imgResult');
+            if (result) {
+              result.innerHTML = `
+                <div class="img-result-row">
+                  <span class="label" data-i18n="imgResultBefore">${pack.imgResultBefore || 'Size before compression:'}</span>
+                  <span class="value">${beforeKb} KB</span>
+                </div>
+                <div class="img-result-row">
+                  <span class="label" data-i18n="imgResultAfter">${pack.imgResultAfter || 'Size after compression:'}</span>
+                  <span class="value">${afterKb} KB</span>
+                </div>`;
+            }
+
+            const download = document.getElementById('imgDownload');
+            if (download) {
+              download.innerHTML = `
+                <a href="${imgCompressedBlobUrl}" download="compressed-${file.name}" class="img-btn primary">
+                  <i class="fas fa-download"></i>
+                  <span data-i18n="imgDownloadBtn">${pack.imgDownloadBtn || 'Download compressed image'}</span>
+                </a>`;
+            }
+          }, 'image/jpeg', IMG_QUALITY);
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function closeAllModalsInternal() {
+      document.querySelectorAll('.demo-modal').forEach(modal => {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      });
+      toggleOverlay(false);
+      resetImgCompressor();
+      stopScannerModal();
+      stopScannerInline();
+    }
+
+    // Expose functions globally for inline handlers
+    window.showQRModal = function() {
+      const qrModal = document.getElementById('qrModal');
+      if (!qrModal) return;
+      qrModal.style.display = 'block';
+      qrModal.setAttribute('aria-hidden', 'false');
+      toggleOverlay(true);
+    };
+
+    window.closeQRModal = function() {
+      const qrModal = document.getElementById('qrModal');
+      if (qrModal) {
+        qrModal.style.display = 'none';
+        qrModal.setAttribute('aria-hidden', 'true');
+      }
+      toggleOverlay(false);
+      stopScannerModal();
+    };
+
+    window.generateQRModal = function() {
+      const qrText = document.getElementById('qrTextModal').value.trim();
+      const qrDiv = document.getElementById('qrcodeModal');
+      if (!qrDiv) return;
+      qrDiv.innerHTML = '';
+      if (qrText) {
+        new QRCode(qrDiv, {
+          text: qrText,
+          width: 180,
+          height: 180,
+          colorDark: '#000000',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    };
+
+    window.startScannerModal = function() {
+      if (!qrScannerModal) {
+        qrScannerModal = new Html5Qrcode('qr-reader-modal');
+      }
+      qrScannerModal.start({ facingMode: 'environment' }, { fps: 10, qrbox: 200 }, message => {
+        const resultEl = document.getElementById('qrResultModal');
+        if (resultEl) resultEl.textContent = `${message}`;
+        stopScannerModal();
+      }, () => {});
+    };
+
+    window.stopScannerModal = function() {
+      if (qrScannerModal) {
+        qrScannerModal.stop().then(() => {
+          qrScannerModal.clear();
+        }).catch(() => {});
+      }
+    };
+
+    window.generateQRInline = function() {
+      const qrText = document.getElementById('qrTextInline').value.trim();
+      const qrDiv = document.getElementById('qrcodeInline');
+      if (!qrDiv) return;
+      qrDiv.innerHTML = '';
+      if (qrText) {
+        new QRCode(qrDiv, {
+          text: qrText,
+          width: 180,
+          height: 180,
+          colorDark: '#000000',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+    };
+
+    window.startScannerInline = function() {
+      if (!qrScannerInline) {
+        qrScannerInline = new Html5Qrcode('qr-reader-inline');
+      }
+      qrScannerInline.start({ facingMode: 'environment' }, { fps: 10, qrbox: 200 }, message => {
+        const resultEl = document.getElementById('qrResultInline');
+        if (resultEl) resultEl.textContent = `${message}`;
+        stopScannerInline();
+      }, () => {});
+    };
+
+    window.stopScannerInline = function() {
+      if (qrScannerInline) {
+        qrScannerInline.stop().then(() => {
+          qrScannerInline.clear();
+        }).catch(() => {});
+      }
+    };
+
+    window.showImgCompressorModal = function() {
+      const modal = document.getElementById('imgCompressorModal');
+      if (!modal) return;
+      resetImgCompressor();
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      toggleOverlay(true);
+      modal.focus();
+    };
+
+    window.closeImgCompressorModal = function() {
+      const modal = document.getElementById('imgCompressorModal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      toggleOverlay(false);
+      resetImgCompressor();
+    };
+
+    window.compressImage = function() {
+      compressActiveImage();
+    };
+
+    window.closeAllModals = function() {
+      closeAllModalsInternal();
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const imgInput = document.getElementById('imgInput');
+      const dropzone = document.getElementById('imgDropzone');
+      const resetBtn = document.getElementById('imgResetBtn');
+
+      setPlaceholder('imgPreview');
+      setPlaceholder('imgResult');
+
+      if (imgInput) {
+        imgInput.addEventListener('change', e => handleImageFile(e.target.files[0]));
+      }
+
+      if (dropzone) {
+        ['dragenter', 'dragover'].forEach(evt => {
+          dropzone.addEventListener(evt, e => {
+            e.preventDefault();
+            dropzone.classList.add('drag-active');
+          });
+        });
+
+        ['dragleave', 'drop'].forEach(evt => {
+          dropzone.addEventListener(evt, e => {
+            e.preventDefault();
+            if (evt === 'drop') {
+              const file = e.dataTransfer.files[0];
+              handleImageFile(file);
+            }
+            dropzone.classList.remove('drag-active');
+          });
+        });
+
+        dropzone.addEventListener('click', () => {
+          if (imgInput) imgInput.click();
+        });
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => resetImgCompressor());
+      }
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          closeAllModalsInternal();
+        }
+      });
+    });
+  })();
+  </script>
+
+  <!-- Image Compressor Modal -->
+  <div id="imgCompressorModal" class="demo-modal img-compressor-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1" style="display:none;">
+    <div class="demo-modal-header">
+      <span class="demo-modal-title" data-i18n="imgCompressorTitle">Image Compressor &amp; Optimizer</span>
+      <button class="close-demo" type="button" onclick="closeImgCompressorModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="img-modal-body">
+      <p class="img-compressor-desc" data-i18n="imgCompressorDesc">أداة لضغط وتحسين الصور مباشرة من المتصفح، تدعم السحب والإفلات، وتعرض حجم الصورة قبل وبعد الضغط، مع إمكانية تحميل الصورة المضغوطة.</p>
+      <div id="imgDropzone" class="img-dropzone" role="button" tabindex="0" aria-label="Upload image">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <span class="img-drop-title" data-i18n="imgDropTitle">قم بسحب الصورة وإفلاتها هنا</span>
+        <small data-i18n="imgDropHint">أو اضغط للاختيار من جهازك</small>
+        <small class="img-drop-note" data-i18n="imgDropSupport">يدعم صيغ JPG وPNG وWebP حتى 10 ميجابايت</small>
+      </div>
+      <input type="file" id="imgInput" accept="image/*" style="display:none;">
+      <div class="img-modal-actions">
+        <button type="button" class="img-btn secondary" id="imgResetBtn">
+          <i class="fas fa-undo"></i>
+          <span data-i18n="imgResetBtn">إعادة التعيين</span>
+        </button>
+        <button type="button" class="img-btn primary" onclick="compressImage()">
+          <i class="fas fa-compress-alt"></i>
+          <span data-i18n="imgCompressorCompress">ضغط الصورة</span>
+        </button>
+      </div>
+      <div class="img-preview-wrapper">
+        <h4 data-i18n="imgPreviewHeading">معاينة</h4>
+        <div class="img-preview" id="imgPreview" data-placeholder-key="imgPreviewPlaceholder" data-placeholder-fallback="لم يتم اختيار صورة بعد">
+          <span data-i18n="imgPreviewPlaceholder">لم يتم اختيار صورة بعد</span>
+        </div>
+      </div>
+      <div class="img-result-wrapper">
+        <h4 data-i18n="imgResultHeading">نتائج الضغط</h4>
+        <div class="img-result" id="imgResult" data-placeholder-key="imgResultPlaceholder" data-placeholder-fallback="ستظهر تفاصيل الحجم بعد الضغط هنا">
+          <span data-i18n="imgResultPlaceholder">ستظهر تفاصيل الحجم بعد الضغط هنا</span>
+        </div>
+        <div class="img-download" id="imgDownload"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Code Modal -->
+<div id="qrModal" class="demo-modal" style="display:none;">
+  <div class="demo-modal-header">
+    <span class="demo-modal-title" data-i18n="qrProjectTitle">QR Code Generator & Scanner</span>
+    <button class="close-demo" onclick="closeQRModal()">&times;</button>
+  </div>
+  <div style="padding:1rem;">
+    <div class="qr-demo-desc" data-i18n="qrProjectDesc" style="margin-bottom:18px;color:#aaa;font-size:1.1rem;text-align:center;"></div>
+    <input type="text" id="qrTextModal" class="qr-input" placeholder="أدخل نص أو رابط هنا..." style="margin-bottom:16px;width:100%;">
+    <button class="qr-btn" onclick="generateQRModal()"><i class="fas fa-qrcode"></i> <span data-i18n="qrTry">إنشاء رمز QR</span></button>
+    <div id="qrcodeModal"></div>
+    <hr style="margin:32px 0;">
+    <div class="qr-scan-section">
+      <div style="font-weight:600; margin-bottom:10px;">مسح رمز QR بالكاميرا</div>
+      <div id="qr-reader-modal" style="margin-bottom:10px;"></div>
+      <div class="qr-result" id="qrResultModal"></div>
+      <button class="qr-btn" onclick="startScannerModal()"><i class="fas fa-camera"></i> بدء المسح</button>
+      <button class="qr-btn" onclick="stopScannerModal()" style="background:#ff7e5f; margin-left:8px;"><i class="fas fa-stop"></i> إيقاف المسح</button>
+    </div>
+    <div class="qr-footer" style="margin-top:32px;color:#aaa;font-size:0.95rem;text-align:center;opacity:0.8;">
+      &copy; RAM™ 2025 | <a href="https://github.com/rami0702" target="_blank">GitHub</a>
+    </div>
+  </div>
+</div>
+<!-- overlay موحد لجميع النوافذ: استخدم العنصر .demo-overlay فقط -->
 
   <!-- Footer -->
   <footer>
