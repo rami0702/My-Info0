@@ -28,7 +28,8 @@ const de = {
     aboutTitle: "Über Mich",
     aboutText1: "Ich bin ein leidenschaftlicher Entwickler mit Fokus auf die Erstellung außergewöhnlicher digitaler Erlebnisse. Mit mehreren Jahren Erfahrung in verschiedenen Technologien verbinde ich technische Expertise mit kreativem Design.",
     aboutText2: "Meine Reise begann mit einfachen Skripten und hat sich zu komplexen Anwendungen, interaktiven Webseiten und immersiven Spielen entwickelt. Ich liebe es, Probleme zu lösen und schöne, funktionale Lösungen zu schaffen.",
-    
+    aboutText3: "Zusätzlich habe ich meine technischen Programmierfähigkeiten kontinuierlich weiterentwickelt und mich in mehreren Programmiersprachen vertieft. Ich habe mich selbst herausgefordert, indem ich komplexe Projekte umgesetzt habe, die normalerweise ein großes Team in einem Unternehmen erfordern würden. Eines meiner bedeutendsten Projekte war die Entwicklung eines Sicherheitssystems zum Schutz vor Datendiebstahl über QR-Codes. Dieses System erkennt und verhindert unautorisierte Zugriffe auf Smartphone-Daten und trägt somit aktiv zum Schutz der Privatsphäre der Nutzer bei.",
+    aboutText4: "Ich arbeite seit über 15 Jahren intensiv mit Computern und verfüge über umfassende Erfahrung im Bereich Hardware. Darüber hinaus habe ich einen eigenen Server für den Fernzugriff entwickelt, ähnlich wie bei Remote Desktop, den ich durch selbst programmierte Anwendungen erweitert habe. Diese ermöglichen mir, sicher und effizient auf Geräte und Systeme in meinem privaten Netzwerk zuzugreifen.",
     // Skills Section
     skillsTitle: "Fähigkeiten & Technologien",
     frontend: "Frontend",
@@ -103,5 +104,13 @@ Object.assign(de, {
     dashboardDesc: 'Ein interaktives Dashboard zur Echtzeitanalyse und Visualisierung von Daten.',
     trademarkText: 'RAM™ - Alle Rechte vorbehalten | Entwickelt vom RAM-Team',
     trademarkText_line1: 'RAM™ - Alle Rechte vorbehalten',
-    trademarkText_line2: 'Entwickelt vom RAM-Team'
+    trademarkText_line2: 'Entwickelt vom RAM-Team',
+    
+    // Statistics Section
+    stat_commitment_value: '100%',
+    stat_commitment_label: 'Engagement für Kreativität',
+    stat_experience_value: '+15',
+    stat_experience_label: 'Jahre Erfahrung',
+    stat_projects_value: '+150',
+    stat_projects_label: 'Abgeschlossene Projekte'
 });
