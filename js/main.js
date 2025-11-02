@@ -1,3 +1,106 @@
+// Loading Screen
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader-wrapper');
+    setTimeout(() => {
+        loader.classList.add('hidden');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    }, 2000); // 2 seconds loading time
+});
+
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem('theme') || 'dark';
+if (currentTheme === 'light') {
+    body.classList.add('light-mode');
+}
+
+// Theme toggle functionality
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    
+    // Save theme preference
+    const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+    localStorage.setItem('theme', theme);
+    
+    // Add rotation animation
+    themeToggle.style.transform = 'rotate(360deg)';
+    setTimeout(() => {
+        themeToggle.style.transform = 'rotate(0deg)';
+    }, 400);
+});
+
+// Statistics Count Up Animation with Easing
+function animateCountUp(element, target, duration = 2500) {
+    const prefix = element.getAttribute('data-prefix') || '';
+    const suffix = element.getAttribute('data-suffix') || '';
+    const startTime = performance.now();
+    
+    // Easing function for smooth animation
+    const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutQuart(progress);
+        const current = Math.floor(easedProgress * target);
+        
+        element.textContent = prefix + current + suffix;
+        
+        // Add pulse effect during counting
+        element.style.transform = `scale(${1 + (1 - progress) * 0.1})`;
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.style.transform = 'scale(1)';
+        }
+    }
+    
+    requestAnimationFrame(update);
+}
+
+// Track if stats have been animated and stats observer
+let statsAnimated = false;
+let statsObserver = null;
+
+// Function to start stats animation
+function startStatsAnimation() {
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+        const statNumbers = statsSection.querySelectorAll('.stat-number');
+        statNumbers.forEach(stat => {
+            const target = parseInt(stat.getAttribute('data-target'));
+            animateCountUp(stat, target);
+        });
+        statsAnimated = true;
+    }
+}
+
+// Initialize Intersection Observer for Statistics
+function initStatsObserver() {
+    statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !statsAnimated) {
+                startStatsAnimation();
+            }
+        });
+    }, { threshold: 0.5 });
+}
+
+// Observe stats section when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initStatsObserver();
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection && statsObserver) {
+        statsObserver.observe(statsSection);
+    }
+});
+
 // Initialize Globe
 function initGlobeBasic() {
     const container = document.getElementById('globeContainer');
@@ -49,6 +152,17 @@ function setLanguage(lang) {
     
     // Set HTML dir attribute for RTL languages
     htmlElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    
+    // Update current language button text
+    const langNames = {
+        'ar': 'عربي',
+        'en': 'English',
+        'de': 'Deutsch'
+    };
+    const currentLangBtn = document.querySelector('.lang-text');
+    if (currentLangBtn) {
+        currentLangBtn.textContent = langNames[lang];
+    }
     
     // Update all text content based on language
     const texts = window[lang];
@@ -117,6 +231,19 @@ function setLanguage(lang) {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
+    
+    // Reset and re-animate statistics if they were already animated
+    if (statsAnimated) {
+        statsAnimated = false;
+        const statsSection = document.getElementById('stats-section');
+        if (statsSection) {
+            const rect = statsSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible) {
+                startStatsAnimation();
+            }
+        }
+    }
 }
 
 // Globe Animation Configuration
