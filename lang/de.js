@@ -1,91 +1,76 @@
-const en = {
-    // New expertise section translations
-    expertiseGamer: "Veteran Gamer",
-    expertiseGamerDesc: "Passionate about gaming technology and performance optimization",
-    expertiseServer: "Server Dev",
-    expertiseServerDesc: "Building and optimizing high-performance server infrastructure",
-    expertiseCode: "Code Crafter",
-    expertiseCodeDesc: "Crafting elegant solutions for complex technical challenges",
-    expertiseNetwork: "Network Architect",
-    expertiseNetworkDesc: "Designing robust and secure network infrastructures",
-    expertiseAutomation: "Automation Expert",
-    expertiseAutomationDesc: "Optimizing gameplay and server performance through automation",
-    expertiseData: "Data Driven",
-    expertiseDataDesc: "Using data analytics for performance optimization and bug hunting",
+const de = {
+    // Neue Übersetzungen für den Expertise-Bereich
+    expertiseGamer: "Erfahrener Gamer",
+    expertiseGamerDesc: "Leidenschaftlich für Spieletechnologie und Leistungsoptimierung",
+    expertiseServer: "Server-Entwickler",
+    expertiseServerDesc: "Aufbau und Optimierung von Hochleistungs-Serverinfrastruktur",
+    expertiseCode: "Code-Handwerker",
+    expertiseCodeDesc: "Entwicklung eleganter Lösungen für komplexe technische Herausforderungen",
+    expertiseNetwork: "Netzwerk-Architekt",
+    expertiseNetworkDesc: "Gestaltung robuster und sicherer Netzwerkinfrastrukturen",
+    expertiseAutomation: "Automatisierungsexperte",
+    expertiseAutomationDesc: "Optimierung von Gameplay und Serverleistung durch Automatisierung",
+    expertiseData: "Datengetrieben",
+    expertiseDataDesc: "Nutzung von Datenanalyse für Leistungsoptimierung und Fehlererkennung",
 
     title: "RAM Security",
-    subtitle: "Creative Developer & Digital Designer",
-    contactMe: "Contact Me",
-    scrollDown: "Scroll Down",
+    subtitle: "Kreativer Entwickler & Digitaler Designer",
+    contactMe: "Kontaktieren Sie mich",
+    scrollDown: "Nach unten scrollen",
     
     // Navigation
-    about: "About",
-    skills: "Skills",
-    projects: "Projects",
-    contact: "Contact",
+    about: "Über mich",
+    skills: "Fähigkeiten",
+    projects: "Projekte",
+    contact: "Kontakt",
     
     // About Section
-    aboutTitle: "About Me",
-    aboutText1: "I am a passionate developer focused on creating exceptional digital experiences. With years of experience in various technologies, I combine technical expertise with creative design.",
-    aboutText2: "My journey began with simple scripts and has evolved into complex applications, interactive websites, and immersive games. I love solving problems and creating beautiful, functional solutions.",
-    aboutText3: "In addition, I have continuously developed my technical programming skills and immersed myself in several programming languages. I have challenged myself by implementing complex projects that would normally require a large team in a company. One of my most significant projects was the development of a security system to protect against data theft via QR codes. This system detects and prevents unauthorized access to smartphone data and thus actively contributes to protecting user privacy.", 
-    aboutText4: "I have been working intensively with computers for over 15 years and have extensive experience in the field of hardware. Furthermore, I have developed my own remote access server, similar to Remote Desktop, which I have extended with applications I programmed myself. These allow me to access devices and systems on my private network securely and efficiently.",
-
-// Skills Section
+    aboutTitle: "Über Mich",
+    aboutText1: "Ich bin ein leidenschaftlicher Entwickler mit Fokus auf die Erstellung außergewöhnlicher digitaler Erlebnisse. Mit mehreren Jahren Erfahrung in verschiedenen Technologien verbinde ich technische Expertise mit kreativem Design.",
+    aboutText2: "Meine Reise begann mit einfachen Skripten und hat sich zu komplexen Anwendungen, interaktiven Webseiten und immersiven Spielen entwickelt. Ich liebe es, Probleme zu lösen und schöne, funktionale Lösungen zu schaffen.",
+    aboutText3: "Zusätzlich habe ich meine technischen Programmierfähigkeiten kontinuierlich weiterentwickelt und mich in mehreren Programmiersprachen vertieft. Ich habe mich selbst herausgefordert, indem ich komplexe Projekte umgesetzt habe, die normalerweise ein großes Team in einem Unternehmen erfordern würden. Eines meiner bedeutendsten Projekte war die Entwicklung eines Sicherheitssystems zum Schutz vor Datendiebstahl über QR-Codes. Dieses System erkennt und verhindert unautorisierte Zugriffe auf Smartphone-Daten und trägt somit aktiv zum Schutz der Privatsphäre der Nutzer bei.",
+    aboutText4: "Ich arbeite seit über 15 Jahren intensiv mit Computern und verfüge über umfassende Erfahrung im Bereich Hardware. Darüber hinaus habe ich einen eigenen Server für den Fernzugriff entwickelt, ähnlich wie bei Remote Desktop, den ich durch selbst programmierte Anwendungen erweitert habe. Diese ermöglichen mir, sicher und effizient auf Geräte und Systeme in meinem privaten Netzwerk zuzugreifen.",
     // Skills Section
-    skillsTitle: "Skills & Technologies",
+    skillsTitle: "Fähigkeiten & Technologien",
     frontend: "Frontend",
     backend: "Backend",
-    gameDev: "Game Development",
-    tools: "Tools & Others",
+    gameDev: "Spieleentwicklung",
+    tools: "Tools & Sonstiges",
     
     // Projects Section
-    projectsTitle: "My Projects",
-    projectsIntro: "Here is a selection of my recent works. Each project represents a unique challenge and showcases my abilities in different areas.",
+    projectsTitle: "Meine Projekte",
+    projectsIntro: "Hier finden Sie eine Auswahl meiner jüngsten Arbeiten. Jedes Projekt stellt eine einzigartige Herausforderung dar und zeigt meine Fähigkeiten in verschiedenen Bereichen.",
     
     // Security Project
-    securityProjectTitle: "Advanced Security Tool",
-    securityProjectDesc: "Advanced tool for detecting and removing security threats. Focuses on the principle that security is a collective responsibility and awareness is the best protection.",
-    viewDemo: "View Demo",
-    viewCode: "View Code",
-    // QR Project
+    securityProjectTitle: "Fortgeschrittenes Sicherheitstool",
+    securityProjectDesc: "Fortgeschrittenes Tool zur Erkennung und Entfernung von Sicherheitsbedrohungen. Basiert auf dem Prinzip, dass Sicherheit eine kollektive Verantwortung ist und Bewusstsein der beste Schutz ist.",
+    viewDemo: "Demo ansehen",
+    viewCode: "Code ansehen",
+    // QR Projekt
     qrProjectTitle: "QR Code Generator & Scanner",
-    qrProjectDesc: "A professional QR code generator and scanner that works entirely in the browser. Create QR codes for any text or link, and scan codes directly from the camera or image with no setup or registration required.",
-    qrTry: "Live Demo",
-    qrCodeLib: "Code & Library",
+    qrProjectDesc: "Professioneller QR-Code-Generator und -Scanner, der vollständig im Browser funktioniert. Erstellen Sie QR-Codes für beliebigen Text oder Links und scannen Sie Codes direkt von der Kamera oder einem Bild – ganz ohne Einrichtung oder Registrierung.",
+    qrTry: "Live-Demo",
+    qrCodeLib: "Code & Bibliothek",
     
     // Contact Section
-    contactTitle: "Contact",
-    contactText: "Have an exciting project or want to collaborate? I look forward to hearing from you!",
-    sendMessage: "Send Message",
+    contactTitle: "Kontakt",
+    contactText: "Haben Sie ein interessantes Projekt oder möchten Sie zusammenarbeiten? Ich freue mich darauf, von Ihnen zu hören!",
+    sendMessage: "Nachricht senden",
     
     // Footer
-    copyright: "All Rights Reserved",
-    allRightsReserved: "All Rights Reserved"
+    copyright: "Alle Rechte vorbehalten",
+    allRightsReserved: "Alle Rechte vorbehalten"
 };
 
-// Missing project and UI keys
-Object.assign(en, {
-    ramSecurityTitle: 'RAM CYBER DEFENSE Elite',
-    ramSecurityDesc: 'An advanced security tool with a PowerShell interface for threat detection and removal. Focused on data protection and security awareness.',
-    downloadText: 'Download Professional Edition v4.0',
-    scriptVersion: 'PowerShell Edition v4.0',
-    dashboardTitle: 'Analytics Dashboard',
-    dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
-    trademarkText: 'RAM™ - All rights reserved | Developed by the RAM team',
-    trademarkText_line1: 'RAM™ - All rights reserved',
-    trademarkText_line2: 'Developed by the RAM team'
-});
-
 // Expose to window so setLanguage can access reliably
-window.en = en;
-// Additional keys added by patch
-Object.assign(window.en, {
+window.de = de;
+// Additional German keys
+Object.assign(window.de, {
     skill_html_css: 'HTML5 & CSS3',
     skill_js: 'JavaScript (ES6+)',
     skill_react: 'React.js',
     skill_vue: 'Vue.js',
-    skill_responsive: 'Responsive Design',
+    skill_responsive: 'Responsives Design',
     skill_node: 'Node.js',
     skill_python: 'Python',
     skill_php: 'PHP',
@@ -94,34 +79,47 @@ Object.assign(window.en, {
     skill_unity: 'Unity (C#)',
     skill_unreal: 'Unreal Engine',
     skill_lua: 'Lua (Love2D)',
-    skill_game_design: 'Game Design',
-    skill_3d: '3D Modeling',
+    skill_game_design: 'Spieldesign',
+    skill_3d: '3D-Modellierung',
     skill_git: 'Git & GitHub',
     skill_docker: 'Docker',
     skill_figma: 'Figma / Adobe XD',
     skill_blender: 'Blender',
-    skill_cicd: 'CI/CD Pipelines',
-    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 REAL-TIME',
-    demo_threats_label: 'Threats Detected:',
-    demo_processes_label: 'Active Processes:',
-    demo_files_label: 'Files Scanned:',
+    skill_cicd: 'CI/CD-Pipelines',
+    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 ECHTZEIT',
+    demo_threats_label: 'Erkannte Bedrohungen:',
+    demo_processes_label: 'Aktive Prozesse:',
+    demo_files_label: 'Gescannt Dateien:',
     demo_status_label: 'Status:',
-    statusReady: 'Ready',
-    quickScanLabel: 'Quick System Scan',
-    deepAnalysisLabel: 'Deep Threat Analysis',
-    customHuntLabel: 'Custom Threat Hunt',
-    nuclearLabel: 'Nuclear Cleanse',
-    guardianLabel: 'Real-Time Guardian',
+    statusReady: 'Bereit',
+    quickScanLabel: 'Schnellscan',
+    deepAnalysisLabel: 'Tiefe Analyse',
+    customHuntLabel: 'Benutzerdefinierte Suche',
+    nuclearLabel: 'Nukleare Reinigung',
+    guardianLabel: 'Echtzeit-Wächter'
+});
+
+// Add missing project/UI keys
+Object.assign(de, {
+    ramSecurityTitle: 'RAM CYBER DEFENSE Elite',
+    ramSecurityDesc: 'Ein fortschrittliches Sicherheitstool mit PowerShell-Oberfläche zur Erkennung und Entfernung von Bedrohungen. Fokus auf Datenschutz und Sicherheitsbewusstsein.',
+    downloadText: 'Professionelle Version herunterladen v4.0',
+    scriptVersion: 'PowerShell Edition v4.0',
+    dashboardTitle: 'Analytics Dashboard',
+    dashboardDesc: 'Ein interaktives Dashboard zur Echtzeitanalyse und Visualisierung von Daten.',
+    trademarkText: 'RAM™ - Alle Rechte vorbehalten | Entwickelt vom RAM-Team',
+    trademarkText_line1: 'RAM™ - Alle Rechte vorbehalten',
+    trademarkText_line2: 'Entwickelt vom RAM-Team',
     
     // Statistics Section
     stat_commitment_value: '100%',
-    stat_commitment_label: 'Commitment to Creativity',
+    stat_commitment_label: 'Engagement für Kreativität',
     stat_experience_value: '+15',
-    stat_experience_label: 'Years of Experience',
+    stat_experience_label: 'Jahre Erfahrung',
     stat_projects_value: '+150',
-    stat_projects_label: 'Completed Projects',
+    stat_projects_label: 'Abgeschlossene Projekte',
     
     // Visitor Stats
-    total_visitors: 'Total Visitors',
-    live_visitors: 'Online Now'
+    total_visitors: 'Gesamtbesucher',
+    live_visitors: 'Jetzt Online'
 });
