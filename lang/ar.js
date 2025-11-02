@@ -111,5 +111,9 @@ Object.assign(ar, {
     // Statistics Section
     stat_commitment_label: 'الالتزام بالإبداع',
     stat_experience_label: 'سنوات خبرة',
-    stat_projects_label: 'مشروع مكتمل'
+    stat_projects_label: 'مشروع مكتمل',
+    
+    // Visitor Stats
+    total_visitors: 'إجمالي الزوار',
+    live_visitors: 'متصل الآن'
 });
