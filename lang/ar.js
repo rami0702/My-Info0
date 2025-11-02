@@ -13,6 +13,11 @@ const ar = {
     expertiseData: "مدفوع بالبيانات",
     expertiseDataDesc: "استخدام تحليلات البيانات لتحسين الأداء واكتشاف الأخطاء",
 
+    imgCompressorTitle: "ضاغط ومحسن الصور",
+    imgCompressorDesc: "أداة لضغط وتحسين الصور مباشرة من المتصفح، تدعم السحب والإفلات، وتعرض حجم الصورة قبل وبعد الضغط، مع إمكانية تحميل الصورة المضغوطة.",
+    imgCompressorTry: "تجربة مباشرة",
+    imgCompressorCode: "الكود والمكتبة",
+    imgCompressorCompress: "ضغط الصورة",
     title: "رامي ماهر",
     subtitle: "مطور إبداعي ومصمم رقمي",
     contactMe: "تواصل معي",
@@ -66,6 +71,38 @@ const ar = {
 
 // Expose to window so setLanguage can access reliably
 window.ar = ar;
+Object.assign(window.ar, {
+    downloadText: 'تحميل النسخة الاحترافية v4.0',
+    scriptVersion: 'إصدار PowerShell v4.0',
+    dashboardTitle: 'لوحة التحليلات',
+    dashboardDesc: 'لوحة تحكم تفاعلية لتحليل البيانات في الوقت الفعلي وعرضها بشكل مرئي.',
+    dashboardImageAlt: 'صورة لوحة التحليلات',
+    ramSecurityTitle: 'رام سيبر ديفينس إيليت',
+    ramSecurityDesc: 'أداة أمان متقدمة مع واجهة PowerShell للكشف عن التهديدات وإزالتها. تركز على حماية البيانات وتعزيز الوعي الأمني.',
+    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 REAL-TIME',
+    demo_threats_label: 'التهديدات المكتشفة:',
+    demo_processes_label: 'العمليات النشطة:',
+    demo_files_label: 'الملفات المفحوصة:',
+    demo_status_label: 'الحالة:',
+    statusReady: 'جاهز',
+    quickScanLabel: '🔍 فحص سريع للنظام',
+    deepAnalysisLabel: '🔬 تحليل عميق للتهديدات',
+    customHuntLabel: '🎯 بحث مخصص عن التهديدات',
+    nuclearLabel: '☢️ تنظيف نووي',
+    guardianLabel: '🛡️ الحماية الفورية',
+    imgResultBefore: 'الحجم قبل الضغط:',
+    imgResultAfter: 'الحجم بعد الضغط:',
+    imgDownloadBtn: 'تحميل الصورة المضغوطة',
+    imgDropTitle: 'قم بسحب الصورة وإفلاتها هنا',
+    imgDropHint: 'أو اضغط للاختيار من جهازك',
+    imgDropSupport: 'يدعم صيغ JPG وPNG وWebP حتى 10 ميجابايت',
+    imgResetBtn: 'إعادة التعيين',
+    imgPreviewHeading: 'معاينة',
+    imgPreviewPlaceholder: 'لم يتم اختيار صورة بعد',
+    imgResultHeading: 'نتائج الضغط',
+    imgResultPlaceholder: 'ستظهر تفاصيل الحجم بعد الضغط هنا',
+    imgCompressorImageAlt: 'معاينة واجهة ضاغط الصور'
+});
 // Additional Arabic keys
 Object.assign(window.ar, {
     skill_html_css: 'HTML5 & CSS3',
