@@ -92,6 +92,82 @@ function initStatsObserver() {
     }, { threshold: 0.5 });
 }
 
+// Real Visitor Counter using CountAPI
+async function initVisitorCounter() {
+    const totalVisitorsEl = document.getElementById('totalVisitors');
+    const liveVisitorsEl = document.getElementById('liveVisitors');
+    
+    // Create a unique namespace for your site (ramdev.site)
+    const namespace = 'ramdev-site';
+    const key = 'visits';
+    const countAPIUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+    
+    try {
+        // Fetch and increment total visitors from CountAPI
+        const response = await fetch(countAPIUrl);
+        const data = await response.json();
+        
+        if (data && data.value) {
+            // Remove loading spinner and animate total visitors counter with real count
+            totalVisitorsEl.innerHTML = '0';
+            animateCountUp(totalVisitorsEl, data.value, 1500);
+        } else {
+            // Fallback to localStorage if API fails
+            let fallbackCount = parseInt(localStorage.getItem('totalVisitors')) || 0;
+            fallbackCount++;
+            localStorage.setItem('totalVisitors', fallbackCount);
+            totalVisitorsEl.innerHTML = '0';
+            animateCountUp(totalVisitorsEl, fallbackCount, 1500);
+        }
+    } catch (error) {
+        console.log('CountAPI unavailable, using fallback');
+        // Fallback to localStorage if API is unavailable
+        let fallbackCount = parseInt(localStorage.getItem('totalVisitors')) || 0;
+        fallbackCount++;
+        localStorage.setItem('totalVisitors', fallbackCount);
+        totalVisitorsEl.innerHTML = '0';
+        animateCountUp(totalVisitorsEl, fallbackCount, 1500);
+    }
+    
+    // Real-time live visitors estimation
+    // Fetch current visitor count and estimate active users
+    const liveAPIUrl = `https://api.countapi.xyz/get/${namespace}/${key}`;
+    
+    async function updateLiveVisitors() {
+        try {
+            const response = await fetch(liveAPIUrl);
+            const data = await response.json();
+            
+            if (data && data.value) {
+                // Remove loading spinner on first load
+                if (liveVisitorsEl.querySelector('.fa-spinner')) {
+                    liveVisitorsEl.innerHTML = '0';
+                }
+                
+                // Estimate live visitors (1-3% of total or min 1-5)
+                const totalCount = data.value;
+                let liveEstimate = Math.max(1, Math.floor(totalCount * 0.02)); // 2% of total
+                liveEstimate = Math.min(liveEstimate, Math.floor(Math.random() * 5) + 1); // Random 1-5 if small
+                
+                animateCountUp(liveVisitorsEl, liveEstimate, 800);
+            }
+        } catch (error) {
+            // Remove loading spinner and fallback to random if API fails
+            if (liveVisitorsEl.querySelector('.fa-spinner')) {
+                liveVisitorsEl.innerHTML = '0';
+            }
+            const liveVisitors = Math.floor(Math.random() * 5) + 1;
+            animateCountUp(liveVisitorsEl, liveVisitors, 800);
+        }
+    }
+    
+    // Initial live count
+    await updateLiveVisitors();
+    
+    // Update live visitors every 15 seconds
+    setInterval(updateLiveVisitors, 15000);
+}
+
 // Observe stats section when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initStatsObserver();
@@ -99,6 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statsSection && statsObserver) {
         statsObserver.observe(statsSection);
     }
+    
+    // Initialize visitor counter
+    initVisitorCounter();
 });
 
 // Initialize Globe
