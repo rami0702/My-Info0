@@ -113,6 +113,10 @@ Object.assign(window.en, {
     stat_commitment_label: 'Commitment to Creativity',
     stat_experience_value: '+15',
     stat_experience_label: 'Years of Experience',
-    stat_projects_value: '+150',
-    stat_projects_label: 'Completed Projects'
+    stat_projects_value: '+15',
+    stat_projects_label: 'Completed Projects',
+    
+    // Visitor Stats
+    total_visitors: 'Total Visitors',
+    live_visitors: 'Online Now'
 });
