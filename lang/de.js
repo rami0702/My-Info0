@@ -46,6 +46,11 @@ const de = {
     securityProjectDesc: "Fortgeschrittenes Tool zur Erkennung und Entfernung von Sicherheitsbedrohungen. Basiert auf dem Prinzip, dass Sicherheit eine kollektive Verantwortung ist und Bewusstsein der beste Schutz ist.",
     viewDemo: "Demo ansehen",
     viewCode: "Code ansehen",
+    // QR Projekt
+    qrProjectTitle: "QR Code Generator & Scanner",
+    qrProjectDesc: "Professioneller QR-Code-Generator und -Scanner, der vollständig im Browser funktioniert. Erstellen Sie QR-Codes für beliebigen Text oder Links und scannen Sie Codes direkt von der Kamera oder einem Bild – ganz ohne Einrichtung oder Registrierung.",
+    qrTry: "Live-Demo",
+    qrCodeLib: "Code & Bibliothek",
     
     // Contact Section
     contactTitle: "Kontakt",
