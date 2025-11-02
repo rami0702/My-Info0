@@ -33,25 +33,71 @@
 </head>
 <body>
 
+<!-- Loading Screen -->
+<div class="loader-wrapper">
+  <div class="loader-content">
+    <div class="loader-logo">
+      <i class="fas fa-shield-alt"></i>
+    </div>
+    <div class="loader-text">
+      <span>R</span>
+      <span>A</span>
+      <span>M</span>
+      <span class="space"></span>
+      <span>S</span>
+      <span>e</span>
+      <span>c</span>
+      <span>u</span>
+      <span>r</span>
+      <span>i</span>
+      <span>t</span>
+      <span>y</span>
+    </div>
+    <div class="loader-spinner"></div>
+    <div class="loader-progress">
+      <div class="loader-progress-bar"></div>
+    </div>
+  </div>
+</div>
+
 <!-- Animated Globe Background -->
 <div id="globeContainer"></div>
+
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <i class="fas fa-moon"></i>
+  <i class="fas fa-sun"></i>
+</button>
 
 <!-- Top-left compact navigation (interactive) -->
 <nav id="topNav" aria-label="Primary navigation">
   <ul>
-    <li><a href="#about" data-globe-lat="24.7136" data-globe-lng="46.6753">About</a></li>
-    <li><a href="#projects" data-globe-lat="40.7128" data-globe-lng="-74.0060">Projects</a></li>
-    <li><a href="#skills" data-globe-lat="51.5074" data-globe-lng="-0.1278">Skills</a></li>
-    <li><a href="#expertise" data-globe-lat="35.6762" data-globe-lng="139.6503">Expertise</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <li><a href="#about" data-globe-lat="24.7136" data-globe-lng="46.6753" data-i18n="about">About</a></li>
+  <li><a href="#projects" data-globe-lat="40.7128" data-globe-lng="-74.0060" data-i18n="projects">Projects</a></li>
+  <li><a href="#skills" data-globe-lat="51.5074" data-globe-lng="-0.1278" data-i18n="skills">Skills</a></li>
+  <li><a href="#expertise" data-globe-lat="35.6762" data-globe-lng="139.6503" data-i18n="expertiseShowcase">Expertise</a></li>
+  <li><a href="#contact" data-i18n="contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- Language Switcher -->
+<!-- Language Switcher - Dropdown -->
 <div class="lang-switcher">
-  <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">عربي</button>
-  <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
-  <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">DE</button>
+  <button class="lang-current" id="currentLang">
+    <i class="fas fa-globe"></i>
+    <span class="lang-text">عربي</span>
+    <i class="fas fa-chevron-down"></i>
+  </button>
+  <div class="lang-dropdown">
+    <button class="lang-btn" data-lang="ar" onclick="setLanguage('ar')">
+      <i class="fas fa-flag"></i> عربي
+    </button>
+    <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">
+      <i class="fas fa-flag"></i> English
+    </button>
+    <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">
+      <i class="fas fa-flag"></i> Deutsch
+    </button>
+  </div>
 </div>
 
 <!-- Header Section -->
@@ -78,6 +124,24 @@
       <p data-i18n="aboutText2">Meine Reise begann mit einfachen Skripten und hat sich zu komplexen Anwendungen, interaktiven Webseiten und immersiven Spielen entwickelt. Ich liebe es, Probleme zu lösen und schöne, funktionale Lösungen zu schaffen.</p>
       <p data-i18n="aboutText3">Zusätzlich habe ich meine technischen Programmierfähigkeiten kontinuierlich weiterentwickelt und mich in mehreren Programmiersprachen vertieft. Ich habe mich selbst herausgefordert, indem ich komplexe Projekte umgesetzt habe, die normalerweise ein großes Team in einem Unternehmen erfordern würden. Eines meiner bedeutendsten Projekte war die Entwicklung eines Sicherheitssystems zum Schutz vor Datendiebstahl über QR-Codes. Dieses System erkennt und verhindert unautorisierte Zugriffe auf Smartphone-Daten und trägt somit aktiv zum Schutz der Privatsphäre der Nutzer bei.</p>
       <p data-i18n="aboutText4">Ich arbeite seit über 15 Jahren intensiv mit Computern und verfüge über umfassende Erfahrung im Bereich Hardware. Darüber hinaus habe ich einen eigenen Server für den Fernzugriff entwickelt, ähnlich wie bei Remote Desktop, den ich durch selbst programmierte Anwendungen erweitert habe. Diese ermöglichen mir, sicher und effizient auf Geräte und Systeme in meinem privaten Netzwerk zuzugreifen.</p>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section" id="stats-section">
+      <div class="stats-container">
+        <div class="stat-box">
+          <div class="stat-number" data-target="100" data-suffix="%">0%</div>
+          <div class="stat-label" data-i18n="stat_commitment_label">الالتزام بالإبداع</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-target="15" data-prefix="+">+0</div>
+          <div class="stat-label" data-i18n="stat_experience_label">سنوات خبرة</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number" data-target="150" data-prefix="+">+0</div>
+          <div class="stat-label" data-i18n="stat_projects_label">مشروع مكتمل</div>
+        </div>
+      </div>
     </section>
 
     <!-- Expertise Showcase -->
@@ -180,7 +244,8 @@
           <div class="project-image">
             <img src="images/image.png" 
                  alt="CYBERSHIELD ELITE SECURITY SUITE Interface" 
-                 class="project-screenshot">
+                 class="project-screenshot"
+                 data-i18n-alt="ramSecurityImageAlt">
           </div>
           <div class="project-info">
             <h3 class="project-title" data-i18n="ramSecurityTitle">RAM CYBER DEFENSE Elite</h3>
@@ -212,7 +277,8 @@
       <div class="project-image">
         <img src="bc2f6e19-b3f2-4e31-8521-e39a3e6d3297.png"
            alt="Dashboard screenshot"
-           class="project-screenshot">
+           class="project-screenshot"
+           data-i18n-alt="dashboardImageAlt">
       </div>
           <div class="project-info">
             <h3 class="project-title" data-i18n="dashboardTitle">لوحة التحليلات</h3>
