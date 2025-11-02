@@ -1,4 +1,9 @@
 const de = {
+    imgCompressorTitle: "Bildkomprimierer & Optimierer",
+    imgCompressorDesc: "Ein Tool zum Komprimieren und Optimieren von Bildern direkt im Browser. Unterstützt Drag & Drop, zeigt die Größe vor und nach der Komprimierung und ermöglicht das Herunterladen des komprimierten Bildes.",
+    imgCompressorTry: "Live-Demo",
+    imgCompressorCode: "Code & Bibliothek",
+    imgCompressorCompress: "Bild komprimieren",
     // Neue Übersetzungen für den Expertise-Bereich
     expertiseGamer: "Erfahrener Gamer",
     expertiseGamerDesc: "Leidenschaftlich für Spieletechnologie und Leistungsoptimierung",
@@ -64,6 +69,38 @@ const de = {
 
 // Expose to window so setLanguage can access reliably
 window.de = de;
+Object.assign(window.de, {
+    downloadText: 'Pro-Version v4.0 herunterladen',
+    scriptVersion: 'PowerShell Edition v4.0',
+    dashboardTitle: 'Analyse-Dashboard',
+    dashboardDesc: 'Interaktives Dashboard zur Echtzeit-Datenanalyse und Visualisierung.',
+    dashboardImageAlt: 'Dashboard-Screenshot',
+    ramSecurityTitle: 'RAM CYBER DEFENSE Elite',
+    ramSecurityDesc: 'Fortschrittliches Sicherheitstool mit PowerShell-Oberfläche zur Erkennung und Entfernung von Bedrohungen. Fokus auf Datenschutz und Sicherheitsbewusstsein.',
+    demoTitle: 'CYBERSHIELD ELITE SECURITY SUITE v4.0 REAL-TIME',
+    demo_threats_label: 'Erkannte Bedrohungen:',
+    demo_processes_label: 'Aktive Prozesse:',
+    demo_files_label: 'Dateien gescannt:',
+    demo_status_label: 'Status:',
+    statusReady: 'Bereit',
+    quickScanLabel: '🔍 Schneller Systemscan',
+    deepAnalysisLabel: '🔬 Tiefenanalyse',
+    customHuntLabel: '🎯 Benutzerdefinierte Bedrohungssuche',
+    nuclearLabel: '☢️ Nukleare Reinigung',
+    guardianLabel: '🛡️ Echtzeit-Schutz',
+    imgResultBefore: 'Größe vor Komprimierung:',
+    imgResultAfter: 'Größe nach Komprimierung:',
+    imgDownloadBtn: 'Komprimiertes Bild herunterladen',
+    imgDropTitle: 'Ziehe dein Bild hierher',
+    imgDropHint: 'oder klicke, um es von deinem Gerät auszuwählen',
+    imgDropSupport: 'Unterstützt JPG, PNG und WebP bis 10 MB',
+    imgResetBtn: 'Zurücksetzen',
+    imgPreviewHeading: 'Vorschau',
+    imgPreviewPlaceholder: 'Noch kein Bild ausgewählt',
+    imgResultHeading: 'Komprimierungsergebnis',
+    imgResultPlaceholder: 'Details erscheinen nach der Komprimierung',
+    imgCompressorImageAlt: 'Vorschau der Image-Compressor-Oberfläche'
+});
 // Additional German keys
 Object.assign(window.de, {
     skill_html_css: 'HTML5 & CSS3',
