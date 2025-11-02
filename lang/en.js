@@ -28,7 +28,10 @@ const en = {
     aboutTitle: "About Me",
     aboutText1: "I am a passionate developer focused on creating exceptional digital experiences. With years of experience in various technologies, I combine technical expertise with creative design.",
     aboutText2: "My journey began with simple scripts and has evolved into complex applications, interactive websites, and immersive games. I love solving problems and creating beautiful, functional solutions.",
-    
+    aboutText3: "In addition, I have continuously developed my technical programming skills and immersed myself in several programming languages. I have challenged myself by implementing complex projects that would normally require a large team in a company. One of my most significant projects was the development of a security system to protect against data theft via QR codes. This system detects and prevents unauthorized access to smartphone data and thus actively contributes to protecting user privacy.", 
+    aboutText4: "I have been working intensively with computers for over 15 years and have extensive experience in the field of hardware. Furthermore, I have developed my own remote access server, similar to Remote Desktop, which I have extended with applications I programmed myself. These allow me to access devices and systems on my private network securely and efficiently.",
+
+// Skills Section
     // Skills Section
     skillsTitle: "Skills & Technologies",
     frontend: "Frontend",
@@ -103,5 +106,13 @@ Object.assign(window.en, {
     deepAnalysisLabel: 'Deep Threat Analysis',
     customHuntLabel: 'Custom Threat Hunt',
     nuclearLabel: 'Nuclear Cleanse',
-    guardianLabel: 'Real-Time Guardian'
+    guardianLabel: 'Real-Time Guardian',
+    
+    // Statistics Section
+    stat_commitment_value: '100%',
+    stat_commitment_label: 'Commitment to Creativity',
+    stat_experience_value: '+15',
+    stat_experience_label: 'Years of Experience',
+    stat_projects_value: '+150',
+    stat_projects_label: 'Completed Projects'
 });
