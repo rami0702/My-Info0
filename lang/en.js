@@ -48,6 +48,11 @@ const en = {
     securityProjectDesc: "Advanced tool for detecting and removing security threats. Focuses on the principle that security is a collective responsibility and awareness is the best protection.",
     viewDemo: "View Demo",
     viewCode: "View Code",
+    // QR Project
+    qrProjectTitle: "QR Code Generator & Scanner",
+    qrProjectDesc: "A professional QR code generator and scanner that works entirely in the browser. Create QR codes for any text or link, and scan codes directly from the camera or image with no setup or registration required.",
+    qrTry: "Live Demo",
+    qrCodeLib: "Code & Library",
     
     // Contact Section
     contactTitle: "Contact",
@@ -113,7 +118,7 @@ Object.assign(window.en, {
     stat_commitment_label: 'Commitment to Creativity',
     stat_experience_value: '+15',
     stat_experience_label: 'Years of Experience',
-    stat_projects_value: '+15',
+    stat_projects_value: '+150',
     stat_projects_label: 'Completed Projects',
     
     // Visitor Stats
