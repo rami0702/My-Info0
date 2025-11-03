@@ -84,7 +84,7 @@ Object.assign(en, {
     dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
     trademarkText: 'RAM™ - All rights reserved | Developed by the RAM team',
     trademarkText_line1: 'RAM™ - All rights reserved',
-    trademarkText_line2: 'Developed by the RAM team'
+    trademarkText_line2: 'Developed by the RAM'
 });
 
 // Expose to window so setLanguage can access reliably
