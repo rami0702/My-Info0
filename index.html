@@ -26,6 +26,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
   
+  <!-- Main Script - Load early -->
+  <script src="js/main.js"></script>
+  
   <!-- Core Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.24.0/dist/globe.gl.min.js"></script>
@@ -422,6 +425,34 @@
             <div class="project-security-note">
               <i class="fas fa-shield-alt"></i>
               <span data-i18n="gameOptimizerNote">يحتاج صلاحيات إدارية - يعمل محلياً فقط</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart Memory Optimizer Project -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="images/memory-optimizer-card.png" class="project-screenshot" alt="Smart Memory Optimizer Demo">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="memoryOptimizerTitle">Smart Memory Optimizer</h3>
+            <p class="project-desc" data-i18n="memoryOptimizerDesc">
+              أداة ذكية لتحليل وتحسين استخدام الذاكرة. تراقب العمليات النشطة، تحرر الموارد المستخدمة بشكل غير فعال، وتوفر مراقبة في الوقت الفعلي.
+            </p>
+            <div class="project-links">
+              <a href="javascript:void(0)" onclick="showMemoryOptimizerModal()" class="project-link">
+                <i class="fas fa-memory"></i> <span data-i18n="memoryOptimizerTry">تجربة مباشرة</span>
+              </a>
+              <a href="downloads/Smart Memory Optimizer.ps1" download class="project-link">
+                <i class="fas fa-download"></i> <span data-i18n="memoryOptimizerDownload">تحميل البرنامج</span>
+              </a>
+              <a href="https://github.com/rami0702/smart-memory-optimizer" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="memoryOptimizerCode">استعراض الكود</span>
+              </a>
+            </div>
+            <div class="project-security-note">
+              <i class="fas fa-shield-alt"></i>
+              <span data-i18n="memoryOptimizerNote">يعمل محلياً فقط - لا يحتاج اتصال بالإنترنت</span>
             </div>
           </div>
         </div>
@@ -968,6 +999,134 @@
       toggleOverlay(false);
     };
 
+    window.showMemoryOptimizerModal = function() {
+      const modal = document.getElementById('memoryOptimizerModal');
+      if (!modal) return;
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      toggleOverlay(true);
+      modal.focus();
+    };
+
+    window.closeMemoryOptimizerModal = function() {
+      const modal = document.getElementById('memoryOptimizerModal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      toggleOverlay(false);
+    };
+
+    window.analyzeMemory = function() {
+      const statusEl = document.getElementById('memoryStatus');
+      const resultsEl = document.getElementById('memoryResults');
+      if (!statusEl || !resultsEl) return;
+
+      statusEl.textContent = 'Analyzing...';
+      resultsEl.innerHTML = '<p>🔍 Scanning memory usage and processes...</p>';
+
+      setTimeout(() => {
+        statusEl.textContent = 'Analysis Complete';
+        resultsEl.innerHTML = `
+          <p>✅ Memory analysis completed successfully!</p>
+          <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
+            <strong>📊 Current Memory Status:</strong><br>
+            • Total RAM: 16 GB<br>
+            • Used: 8.5 GB (53%)<br>
+            • Available: 7.5 GB<br>
+            • Processes: 145 active<br>
+            • Memory leaks detected: 2 minor
+          </div>
+        `;
+      }, 2000);
+    };
+
+    window.optimizeMemory = function() {
+      const statusEl = document.getElementById('memoryStatus');
+      const resultsEl = document.getElementById('memoryResults');
+      if (!statusEl || !resultsEl) return;
+
+      statusEl.textContent = 'Optimizing...';
+      resultsEl.innerHTML = '<p>🛠️ Optimizing memory usage...</p>';
+
+      setTimeout(() => {
+        statusEl.textContent = 'Optimization Complete!';
+        resultsEl.innerHTML = `
+          <p>✅ Memory optimized successfully!</p>
+          <div style="background: rgba(0,255,0,0.1); padding: 10px; border-radius: 8px; margin-top: 10px; border: 1px solid #00ff00;">
+            <strong>🎉 Optimization Results:</strong><br>
+            • Memory freed: 1.2 GB<br>
+            • Performance improved: 15%<br>
+            • Processes optimized: 23<br>
+            • Memory leaks fixed: 2
+          </div>
+        `;
+      }, 3000);
+    };
+
+    window.startMemoryMonitor = function() {
+      const statusEl = document.getElementById('memoryStatus');
+      const resultsEl = document.getElementById('memoryResults');
+      if (!statusEl || !resultsEl) return;
+
+      statusEl.textContent = 'Monitoring...';
+      resultsEl.innerHTML = '<p>📊 Real-time monitoring started...</p>';
+
+      // Simulate real-time updates
+      let usage = 45;
+      const interval = setInterval(() => {
+        usage = Math.max(30, Math.min(80, usage + (Math.random() - 0.5) * 10));
+        resultsEl.innerHTML = `
+          <p>📊 Real-time monitoring active...</p>
+          <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
+            <strong>Current Memory Usage:</strong><br>
+            • RAM Usage: ${usage.toFixed(1)}%<br>
+            • Available Memory: ${(100 - usage).toFixed(1)}%<br>
+            • Active Processes: ${Math.floor(140 + Math.random() * 20)}<br>
+            • Last updated: ${new Date().toLocaleTimeString()}
+          </div>
+          <button onclick="clearInterval(${interval}); document.getElementById('memoryStatus').textContent='Ready'; document.getElementById('memoryResults').innerHTML='<p>Monitoring stopped</p>';" style="margin-top: 10px; background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Stop Monitoring</button>
+        `;
+      }, 2000);
+    };
+
+    window.launchMemoryOptimizerGUI = function() {
+      // Show instructions for launching GUI
+      const modal = document.createElement('div');
+      modal.className = 'demo-overlay';
+      modal.onclick = () => modal.remove();
+
+      modal.innerHTML = `
+        <div class="demo-modal">
+          <div class="demo-modal-header">
+            <button class="close-demo" onclick="this.closest('.demo-overlay').remove()">&times;</button>
+          </div>
+          <div style="padding: 2rem; text-align: center;">
+            <div style="background: rgba(0,0,0,0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0; text-align: left;">
+              <strong>الطريقة الأولى - PowerShell:</strong><br>
+              <code style="color: #00aa44;">.\Smart Memory Optimizer.ps1 -GUI</code><br><br>
+              <strong>الطريقة الثانية - من القائمة:</strong><br>
+              شغل البرنامج واختر الخيار رقم 4
+            </div>
+            <p style="color: #aaa; font-size: 0.9rem;">
+              ⚠️ تأكد من تشغيل PowerShell كمسؤول للحصول على أفضل النتائج
+            </p>
+            <button onclick="this.closest('.demo-overlay').remove()" style="margin-top: 1rem; background: #0088ff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+              فهمت
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+
+      // Prevent modal close when clicking inside
+      const modalContent = modal.querySelector('.demo-modal');
+      if (modalContent) {
+        modalContent.onclick = (e) => e.stopPropagation();
+      }
+    };
+
     window.createGameBackup = function() {
       const resultsDiv = document.getElementById('gameOptimizerResults');
       const lang = (typeof currentLang !== 'undefined' && currentLang) || localStorage.getItem('preferredLanguage') || 'ar';
@@ -1361,18 +1520,41 @@
     <div id="qrcodeModal"></div>
     <hr style="margin:32px 0;">
     <div class="qr-scan-section">
-      <div style="font-weight:600; margin-bottom:10px;">مسح رمز QR بالكاميرا</div>
+      <div data-i18n="qrScanCamera" style="font-weight:600; margin-bottom:10px;"></div>
       <div id="qr-reader-modal" style="margin-bottom:10px;"></div>
       <div class="qr-result" id="qrResultModal"></div>
-      <button class="qr-btn" onclick="startScannerModal()"><i class="fas fa-camera"></i> بدء المسح</button>
-      <button class="qr-btn" onclick="stopScannerModal()" style="background:#ff7e5f; margin-left:8px;"><i class="fas fa-stop"></i> إيقاف المسح</button>
+      <button class="qr-btn" onclick="startScannerModal()"><i class="fas fa-camera"></i> <span data-i18n="qrStartScan">Start Scan</span></button>
+      <button class="qr-btn" onclick="stopScannerModal()" style="background:#ff7e5f; margin-left:8px;"><i class="fas fa-stop"></i> <span data-i18n="qrStopScan">Stop Scan</span></button>
     </div>
-    <div class="qr-footer" style="margin-top:32px;color:#aaa;font-size:0.95rem;text-align:center;opacity:0.8;">
-      &copy; RAM™ 2025 | <a href="https://github.com/rami0702" target="_blank">GitHub</a>
-    </div>
+    
   </div>
 </div>
 <!-- overlay موحد لجميع النوافذ: استخدم العنصر .demo-overlay فقط -->
+
+  <!-- Memory Optimizer Modal -->
+<div id="memoryOptimizerModal" class="demo-modal" style="display:none;">
+  <div class="demo-modal-header">
+    <span class="demo-modal-title" data-i18n="memoryOptimizerTitle">Smart Memory Optimizer</span>
+    <button class="close-demo" onclick="closeMemoryOptimizerModal()">&times;</button>
+  </div>
+  <div style="padding:1rem;">
+    <div class="memory-demo-desc" data-i18n="memoryOptimizerDesc" style="margin-bottom:18px;color:#aaa;font-size:1.1rem;text-align:center;"></div>
+    <div class="demo-stats">
+      <div class="stat-item">
+        <span>Status:</span> <span class="status-text" id="memoryStatus">Ready</span>
+      </div>
+    </div>
+    <div class="demo-actions">
+      <button class="demo-button memory-analyze" onclick="analyzeMemory()"><i class="fas fa-search"></i> Analyze Memory</button>
+      <button class="demo-button memory-optimize" onclick="optimizeMemory()"><i class="fas fa-wrench"></i> Optimize Memory</button>
+      <button class="demo-button memory-monitor" onclick="startMemoryMonitor()"><i class="fas fa-chart-line"></i> Real-time Monitor</button>
+    </div>
+    <div class="demo-results" id="memoryResults">
+      <p>Works locally only - no internet connection required</p>
+    </div>
+    
+  </div>
+</div>
 
   <!-- Footer -->
   <footer>
@@ -1391,7 +1573,7 @@
 
         <div class="footer-right">
           <p class="trademark">
-            <span data-i18n="trademarkText_line1">RAM™ - جميع الحقوق محفوظة</span><br>
+            <span data-i18n="trademarkText_line1">RAM - جميع الحقوق محفوظة</span><br>
             <span data-i18n="trademarkText_line2">تم التطوير بواسطة RAM</span>
           </p>
           <div class="social-links">
@@ -1406,9 +1588,6 @@
     </div>
   </footer>
 
-  <!-- Main Script -->
-  <script src="js/main.js"></script>
-  
   <!-- Dynamic Year Script -->
   <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();
