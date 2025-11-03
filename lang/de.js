@@ -18,6 +18,8 @@ const de = {
     expertiseData: "Datengetrieben",
     expertiseDataDesc: "Nutzung von Datenanalyse für Leistungsoptimierung und Fehlererkennung",
 
+    expertiseShowcase: "Expertise",
+
     title: "RAM Security",
     subtitle: "Kreativer Entwickler & Digitaler Designer",
     contactMe: "Kontaktieren Sie mich",
@@ -145,8 +147,8 @@ Object.assign(de, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'Analytics Dashboard',
     dashboardDesc: 'Ein interaktives Dashboard zur Echtzeitanalyse und Visualisierung von Daten.',
-    trademarkText: 'RAM™ - Alle Rechte vorbehalten | Entwickelt vom RAM-Team',
-    trademarkText_line1: 'RAM™ - Alle Rechte vorbehalten',
+    trademarkText: 'RAM - Alle Rechte vorbehalten | Entwickelt vom RAM-Team',
+    trademarkText_line1: 'RAM - Alle Rechte vorbehalten',
     trademarkText_line2: 'Entwickelt vom RAM-Team',
     
     // Statistics Section
@@ -241,4 +243,29 @@ Object.assign(de, {
     gameOptimizerError: 'Ein Fehler ist aufgetreten!',
     gameOptimizerWarning: 'Warnung: Dies wird Systemeinstellungen ändern',
     gameOptimizerNote: 'Hinweis: Stellen Sie sicher, dass Sie ein Backup erstellen, bevor Sie optimieren',
+    memoryOptimizerTitle: 'Intelligenter Speicheroptimierer',
+    memoryOptimizerDesc: 'Intelligentes Tool zur Speicheranalyse und -optimierung. Überwacht aktive Prozesse, gibt ineffizient genutzte Ressourcen frei und bietet Echtzeit-Überwachung.',
+    memoryOptimizerTry: 'Jetzt ausprobieren',
+    memoryOptimizerCode: 'Code anzeigen',
+    memoryOptimizerDownload: 'Programm herunterladen',
+    memoryOptimizerOptimize: 'Speicher optimieren',
+    memoryOptimizerAnalyze: 'Speicher analysieren',
+    memoryOptimizerMonitor: 'Echtzeit-Überwachung',
+    memoryOptimizerStatus: 'Status:',
+    memoryOptimizerReady: 'Bereit',
+    memoryOptimizerOptimizing: 'Optimiere...',
+    memoryOptimizerAnalyzing: 'Analysiere...',
+    memoryOptimizerMonitoring: 'Überwache...',
+    memoryOptimizerSuccess: 'Optimierung erfolgreich abgeschlossen!',
+    memoryOptimizerError: 'Ein Fehler ist aufgetreten!',
+    memoryOptimizerWarning: 'Warnung: Dies wird die Speichernutzung optimieren',
+    memoryOptimizerNote: 'Funktioniert nur lokal - keine Internetverbindung erforderlich',
+    memoryOptimizerGUI: 'GUI-Schnittstelle starten',
+});
+
+// QR modal buttons and headings
+Object.assign(window.de, {
+    qrScanCamera: 'QR mit der Kamera scannen',
+    qrStartScan: 'Scan starten',
+    qrStopScan: 'Scan stoppen'
 });
