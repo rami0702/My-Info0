@@ -10,8 +10,8 @@ window.addEventListener('load', () => {
 });
 
 // Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
+let themeToggle = document.getElementById('themeToggle');
 
 // Check for saved theme preference or default to dark mode
 const currentTheme = localStorage.getItem('theme') || 'dark';
@@ -19,20 +19,25 @@ if (currentTheme === 'light') {
     body.classList.add('light-mode');
 }
 
-// Theme toggle functionality
-themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    
-    // Save theme preference
-    const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
-    localStorage.setItem('theme', theme);
-    
-    // Add rotation animation
-    themeToggle.style.transform = 'rotate(360deg)';
-    setTimeout(() => {
-        themeToggle.style.transform = 'rotate(0deg)';
-    }, 400);
-});
+// Theme toggle functionality - attach when DOM is ready
+function initThemeToggle() {
+    themeToggle = themeToggle || document.getElementById('themeToggle');
+    if (!themeToggle) return;
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+
+        // Save theme preference
+        const theme = body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('theme', theme);
+
+        // Add rotation animation
+        themeToggle.style.transform = 'rotate(360deg)';
+        setTimeout(() => {
+            themeToggle.style.transform = 'rotate(0deg)';
+        }, 400);
+    });
+}
 
 // Statistics Count Up Animation with Easing
 function animateCountUp(element, target, duration = 2500) {
@@ -142,11 +147,20 @@ function initGlobeBasic() {
     animate();
 }
 
-// Language Management
-let currentLang = localStorage.getItem('preferredLanguage') || 'ar';
+// Make setLanguage globally available
+window.setLanguage = setLanguage;
+
+// Initialize current language from localStorage or default to 'en'
+let currentLang = localStorage.getItem('preferredLanguage') || 'en';
+
+// Get HTML element for direction changes
 const htmlElement = document.documentElement;
 
 function setLanguage(lang) {
+    if (!lang) {
+        console.error('No language provided to setLanguage');
+        return;
+    }
     currentLang = lang;
     window.currentLang = lang; // Make it globally available
     localStorage.setItem('preferredLanguage', lang);
@@ -182,14 +196,19 @@ function setLanguage(lang) {
             if (el.hasAttribute('data-i18n')) el.alt = value;
             else el.title = value;
         } else {
-            // If the element has no child ELEMENT nodes, it's safe to replace its text.
-            // Using el.children.length avoids issues where whitespace creates extra text nodes.
-            if (el.children.length === 0) {
-                el.textContent = value;
+            // Check if this element has a child span with data-i18n
+            const textSpan = el.querySelector('span[data-i18n]');
+            if (textSpan) {
+                // Update only the span's text content
+                textSpan.textContent = value;
             } else {
-                // If the element contains child elements, avoid clobbering them.
-                // Store a rendered value that can be used by CSS/ARIA consumers if needed.
-                el.dataset.i18nRendered = value;
+                // For elements without child spans, use innerHTML to preserve icons
+                const icon = el.querySelector('i');
+                if (icon) {
+                    el.innerHTML = icon.outerHTML + ' ' + value;
+                } else {
+                    el.textContent = value;
+                }
             }
         }
     };
@@ -257,6 +276,9 @@ function setLanguage(lang) {
         }
     }
 }
+
+// Initialize language immediately
+setLanguage(currentLang);
 
 // Globe Animation Configuration
 function initGlobe() {
@@ -513,6 +535,8 @@ function closeRamDemoModal() {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize language
     setLanguage(currentLang);
+    // Initialize theme toggle (attach handlers now that DOM exists)
+    try { initThemeToggle(); } catch (err) { /* ignore if not defined */ }
     // Initialize globe with safe fallback.
     try {
         if (typeof Globe === 'function') {
@@ -597,4 +621,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', animateOnScroll);
     animateOnScroll(); // Initial check
+
+    // Add a small footer inside each project modal (if present)
+    try {
+        const modalIds = ['qrModal','imgCompressorModal','passwordGeneratorModal','webVulnScannerModal','gameOptimizerModal','memoryOptimizerModal','ramDemoModal'];
+        modalIds.forEach(id => {
+            const modal = document.getElementById(id);
+            if (!modal) return;
+            // don't add if a modal-footer already exists or the GitHub link is already present
+            if (modal.querySelector('.modal-footer') || modal.querySelector('a[href*="github.com/rami0702"]')) return; // already added
+            const footer = document.createElement('div');
+            footer.className = 'modal-footer';
+            footer.style.textAlign = 'center';
+            footer.style.marginTop = '12px';
+            footer.style.color = 'var(--accent)';
+            const year = new Date().getFullYear();
+            footer.innerHTML = '&copy; RAM ' + year + ' | <a href="https://github.com/rami0702" target="_blank">GitHub</a>';
+            // Append to modal content area (prefer inside modal body if exists)
+            const body = modal.querySelector('.img-modal-body') || modal.querySelector('.demo-modal') || modal;
+            body.appendChild(footer);
+        });
+    } catch (err) {
+        // ignore
+    }
 });
+
