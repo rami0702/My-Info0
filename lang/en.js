@@ -82,7 +82,7 @@ Object.assign(en, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'Analytics Dashboard',
     dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
-    trademarkText: 'RAM™ - All rights reserved | Developed by the RAM team',
+    trademarkText: 'RAM™ - All rights reserved | Developed by the RAM',
     trademarkText_line1: 'RAM™ - All rights reserved',
     trademarkText_line2: 'Developed by the RAM'
 });
