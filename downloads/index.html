@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Image Compressor & Optimizer - Compress images directly in your browser. Developed by RAM CYBER DEFENSE">
+  <meta name="author" content="RAM CYBER DEFENSE">
+  <meta name="keywords" content="image compressor, optimizer, RAM security, cyber defense, image optimization">
+  <title>Image Compressor & Optimizer - RAM CYBER DEFENSE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5P9GdM9l16fsHuxPnX0wh8QM/bRYBRSwGH4u5zTh+V4GNzcRCjSc5vNmiXfw5w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div class="ram-badge">
+        <i class="fas fa-shield-alt"></i>
+        <span>RAM CYBER DEFENSE</span>
+      </div>
+      <h1>Image Compressor &amp; Optimizer</h1>
+      <p class="lead">Compress and optimize images in your browser. Supports drag &amp; drop, displays sizes before and after compression, and lets you download the optimized image instantly.</p>
+      <div class="version-info">
+        <span class="version">pro</span>
+        <span class="developer">Developed by RAM Security</span>
+      </div>
+    </header>
+
+    <section class="compressor-card" aria-label="Image compression tool">
+      <div id="dropzone" class="dropzone" role="button" tabindex="0" aria-label="Upload an image">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h2>Drag your image here</h2>
+        <p>or click to choose from your device</p>
+        <small>Supports JPG, PNG, and WebP up to 10 MB</small>
+        <div class="security-badge">
+          <i class="fas fa-lock"></i>
+          <span>100% Secure - No data leaves your browser</span>
+        </div>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" hidden>
+
+      <div class="actions">
+        <button type="button" id="resetBtn" class="btn secondary">
+          <i class="fas fa-undo"></i>
+          Reset
+        </button>
+        <button type="button" id="compressBtn" class="btn primary">
+          <i class="fas fa-compress-alt"></i>
+          Compress Image
+        </button>
+      </div>
+
+      <div class="panel preview-panel">
+        <h3>Preview</h3>
+        <div id="preview" class="preview" data-placeholder="No image selected yet">
+          <span>No image selected yet</span>
+        </div>
+      </div>
+
+      <div class="panel results-panel">
+        <h3>Compression Results</h3>
+        <div id="results" class="results" data-placeholder="Compression stats will appear after processing">
+          <span>Compression stats will appear after processing</span>
+        </div>
+        <div id="download" class="download"></div>
+      </div>
+
+      <!-- RAM Security Features -->
+      <div class="ram-features">
+        <h4><i class="fas fa-star"></i> RAM Security Features</h4>
+        <div class="features-grid">
+          <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <span>Local Processing</span>
+            <small>No server uploads</small>
+          </div>
+          <div class="feature">
+            <i class="fas fa-bolt"></i>
+            <span>Fast Compression</span>
+            <small>Optimized algorithms</small>
+          </div>
+          <div class="feature">
+            <i class="fas fa-chart-line"></i>
+            <span>Quality Control</span>
+            <small>Smart optimization</small>
+          </div>
+          <div class="feature">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Mobile Friendly</span>
+            <small>Responsive design</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div class="copyright-section">
+        <div class="ram-logo">
+          <i class="fas fa-shield-alt"></i>
+          <strong>RAM CYBER DEFENSE</strong>
+        </div>
+        <p>&copy; 2025 RAM Security. All rights reserved.</p>
+        <p class="license">Licensed under RAM Security Proprietary License</p>
+      </div>
+      
+      <div class="developer-info">
+        <p><strong>Developed by:</strong> RAM Security Team</p>
+        <p><strong>Contact:</strong> <a href="https://ramdev.site" target="_blank">https://ramdev.site</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/rami0702" target="_blank">github.com/rami0702</a></p>
+      </div>
+
+    
+    <div class="security-notice">
+      <i class="fas fa-lock"></i>
+      <span>This tool processes images locally in your browser. No data is sent to any server.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
