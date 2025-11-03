@@ -154,6 +154,7 @@ Object.assign(window.en, {
     customHuntLabel: 'Custom Threat Hunt',
     nuclearLabel: 'Nuclear Cleanse',
     guardianLabel: 'Real-Time Guardian',
+    projectSecurityNote: '100% Secure - No data leaves your browser',
 
     // Statistics Section
     stat_commitment_value: '100%',
