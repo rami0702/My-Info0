@@ -135,7 +135,8 @@ Object.assign(window.ar, {
     deepAnalysisLabel: 'تحليل عميق',
     customHuntLabel: 'بحث مخصص',
     nuclearLabel: 'تنظيف نووي',
-    guardianLabel: 'الحماية الفورية'
+    guardianLabel: 'الحماية الفورية',
+    projectSecurityNote: 'آمن 100٪ - لا يتم إرسال أي بيانات خارج متصفحك'
 });
 
 // Add missing project/UI keys
