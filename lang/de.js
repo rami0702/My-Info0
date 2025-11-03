@@ -145,8 +145,8 @@ Object.assign(de, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'Analytics Dashboard',
     dashboardDesc: 'Ein interaktives Dashboard zur Echtzeitanalyse und Visualisierung von Daten.',
-    trademarkText: 'RAM™ - Alle Rechte vorbehalten | Entwickelt vom RAM',
-    trademarkText_line1: 'RAM™ - Alle Rechte vorbehalten',
+    trademarkText: 'RAM - Alle Rechte vorbehalten | Entwickelt vom RAM',
+    trademarkText_line1: 'RAM - Alle Rechte vorbehalten',
     trademarkText_line2: 'Entwickelt vom RAM-Team',
     
     // Statistics Section
