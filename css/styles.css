@@ -1450,6 +1450,10 @@ footer {
 .nuclear { background: #cc0000; }
 .guardian { background: #8800ff; }
 
+.memory-analyze { background: #00aa44; }
+.memory-optimize { background: #ff6600; }
+.memory-monitor { background: #aa00ff; }
+
 .demo-button:hover {
   transform: translateY(-2px);
   filter: brightness(120%);
