@@ -82,9 +82,9 @@ Object.assign(en, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'Analytics Dashboard',
     dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
-    trademarkText: 'RAM - All rights reserved | Developed by the RAM',
-    trademarkText_line1: 'RAM - All rights reserved',
-    trademarkText_line2: 'Developed by the RAM'
+    trademarkText: 'RAM™ - All rights reserved | Developed by the RAM team',
+    trademarkText_line1: 'RAM™ - All rights reserved',
+    trademarkText_line2: 'Developed by the RAM team'
 });
 
 // Expose to window so setLanguage can access reliably
@@ -166,5 +166,33 @@ Object.assign(window.en, {
 
     // Visitor Stats
     total_visitors: 'Total Visitors',
-    live_visitors: 'Online Now'
+    live_visitors: 'Online Now',
+
+    // Password Generator
+    passwordGeneratorTitle: 'Password Generator & Strength Checker',
+    passwordGeneratorDesc: 'A secure and advanced password generator that works entirely in the browser. Create strong passwords with customizable options for length and character types, and check the strength of existing passwords.',
+    passwordGeneratorTry: 'Live Demo',
+    passwordGeneratorCode: 'View Code',
+    passwordGeneratorGenerate: 'Generate Password',
+    passwordGeneratorCopy: 'Copy',
+    passwordGeneratorResult: 'Generated Password',
+    passwordGeneratorPlaceholder: 'Click "Generate Password" to start',
+    passwordGeneratorOptions: 'Generation Options',
+    passwordGeneratorLength: 'Length:',
+    passwordGeneratorUppercase: 'Uppercase letters:',
+    passwordGeneratorLowercase: 'Lowercase letters:',
+    passwordGeneratorNumbers: 'Numbers:',
+    passwordGeneratorSymbols: 'Symbols:',
+    passwordGeneratorStrengthCheck: 'Password Strength Check',
+    passwordGeneratorCheckStrength: 'Check Strength',
+    passwordGeneratorEnterPassword: 'Enter a password to check its strength',
+    passwordGeneratorCopied: 'Password copied to clipboard',
+    passwordGeneratorStrengthVeryWeak: 'Very Weak',
+    passwordGeneratorStrengthWeak: 'Weak',
+    passwordGeneratorStrengthMedium: 'Medium',
+    passwordGeneratorStrengthStrong: 'Strong',
+    passwordGeneratorStrengthVeryStrong: 'Very Strong',
+    passwordGeneratorStrengthLabel: 'Password Strength:',
+    passwordGeneratorEnterPasswordPrompt: 'Please enter a password',
+    passwordGeneratorSelectType: 'Please select at least one character type'
 });
