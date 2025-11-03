@@ -1,3 +1,4 @@
+
 const en = {
     imgCompressorTitle: "Image Compressor & Optimizer",
     imgCompressorDesc: "A tool to compress and optimize images directly in the browser. Supports drag & drop, shows size before and after compression, and allows downloading the compressed image.",
@@ -17,6 +18,8 @@ const en = {
     expertiseAutomationDesc: "Optimizing gameplay and server performance through automation",
     expertiseData: "Data Driven",
     expertiseDataDesc: "Using data analytics for performance optimization and bug hunting",
+
+    expertiseShowcase: "Expertise",
 
     imgCompressorTitle: "Image Compressor & Optimizer",
     imgCompressorDesc: "A tool to compress and optimize images directly in the browser. Supports drag & drop, shows size before and after compression, and allows downloading the compressed image.",
@@ -82,8 +85,8 @@ Object.assign(en, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'Analytics Dashboard',
     dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
-    trademarkText: 'RAM™ - All rights reserved | Developed by the RAM team',
-    trademarkText_line1: 'RAM™ - All rights reserved',
+    trademarkText: 'RAM - All rights reserved | Developed by the RAM team',
+    trademarkText_line1: 'RAM - All rights reserved',
     trademarkText_line2: 'Developed by the RAM team'
 });
 
@@ -248,4 +251,29 @@ Object.assign(window.en, {
     gameOptimizerError: 'An error occurred!',
     gameOptimizerWarning: 'Warning: This will modify system settings',
     gameOptimizerNote: 'Note: Make sure to create a backup before optimizing',
+    memoryOptimizerTitle: 'Smart Memory Optimizer',
+    memoryOptimizerDesc: 'Intelligent memory analysis and optimization tool. Monitors active processes, frees inefficiently used resources, and provides real-time monitoring.',
+    memoryOptimizerTry: 'Try it now',
+    memoryOptimizerCode: 'View Code',
+    memoryOptimizerDownload: 'Download Program',
+    memoryOptimizerOptimize: 'Optimize Memory',
+    memoryOptimizerAnalyze: 'Analyze Memory',
+    memoryOptimizerMonitor: 'Real-time Monitor',
+    memoryOptimizerStatus: 'Status:',
+    memoryOptimizerReady: 'Ready',
+    memoryOptimizerOptimizing: 'Optimizing...',
+    memoryOptimizerAnalyzing: 'Analyzing...',
+    memoryOptimizerMonitoring: 'Monitoring...',
+    memoryOptimizerSuccess: 'Optimization completed successfully!',
+    memoryOptimizerError: 'An error occurred!',
+    memoryOptimizerWarning: 'Warning: This will optimize memory usage',
+    memoryOptimizerNote: 'Works locally only - no internet connection required',
+    memoryOptimizerGUI: 'Launch GUI Interface',
+});
+
+// QR modal buttons and headings
+Object.assign(window.en, {
+    qrScanCamera: 'Scan QR with camera',
+    qrStartScan: 'Start Scan',
+    qrStopScan: 'Stop Scan'
 });
