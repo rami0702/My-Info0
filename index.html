@@ -347,6 +347,31 @@
     </div>
   </div>
 </div>
+
+        <!-- Password Generator Project -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="images/password-generator-card.png" class="project-screenshot" alt="Password Generator Demo">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="passwordGeneratorTitle">Password Generator & Strength Checker</h3>
+            <p class="project-desc" data-i18n="passwordGeneratorDesc">
+              مولد كلمات مرور آمنة ومتقدم يعمل بالكامل على المتصفح. أنشئ كلمات مرور قوية مع خيارات مخصصة للطول والأحرف، وتحقق من قوة كلمات المرور الموجودة.
+            </p>
+            <div class="project-links">
+              <a href="javascript:void(0)" onclick="showPasswordGeneratorModal()" class="project-link">
+                <i class="fas fa-key"></i> <span data-i18n="passwordGeneratorTry">تجربة مباشرة</span>
+              </a>
+              <a href="https://github.com/rami0702/PG" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="passwordGeneratorCode">عرض الكود</span>
+              </a>
+            </div>
+            <div class="project-security-note">
+              <i class="fas fa-lock"></i>
+              <span data-i18n="projectSecurityNote">100% Secure - No data leaves your browser</span>
+            </div>
+          </div>
+        </div>
     </section>
 
 <!-- Contact Section -->
@@ -677,6 +702,130 @@
       compressActiveImage();
     };
 
+    window.showPasswordGeneratorModal = function() {
+      const modal = document.getElementById('passwordGeneratorModal');
+      if (!modal) return;
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      toggleOverlay(true);
+      modal.focus();
+      updateLengthValue();
+      // Set placeholder based on current language
+      const placeholderInput = document.getElementById('passwordCheckInput');
+      if (placeholderInput && window.currentLang && window[window.currentLang]) {
+        placeholderInput.placeholder = window[window.currentLang].passwordGeneratorEnterPassword;
+      }
+    };
+
+    window.closePasswordGeneratorModal = function() {
+      const modal = document.getElementById('passwordGeneratorModal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      toggleOverlay(false);
+    };
+
+    window.generatePassword = function() {
+      const length = document.getElementById('passwordLength').value;
+      const includeUppercase = document.getElementById('includeUppercase').checked;
+      const includeLowercase = document.getElementById('includeLowercase').checked;
+      const includeNumbers = document.getElementById('includeNumbers').checked;
+      const includeSymbols = document.getElementById('includeSymbols').checked;
+
+      const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+      const numbers = '0123456789';
+      const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+      let charset = '';
+      if (includeUppercase) charset += uppercase;
+      if (includeLowercase) charset += lowercase;
+      if (includeNumbers) charset += numbers;
+      if (includeSymbols) charset += symbols;
+
+      const lang = window.currentLang && window[window.currentLang] ? window[window.currentLang] : window.ar;
+      
+      if (charset === '') {
+        alert(lang.passwordGeneratorSelectType);
+        return;
+      }
+
+      let password = '';
+      for (let i = 0; i < length; i++) {
+        password += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+
+      document.getElementById('passwordDisplay').textContent = password;
+    };
+
+    window.copyPassword = function() {
+      const password = document.getElementById('passwordDisplay').textContent;
+      const lang = window.currentLang && window[window.currentLang] ? window[window.currentLang] : window.ar;
+      const placeholderText = lang.passwordGeneratorPlaceholder;
+      
+      if (password && password !== placeholderText) {
+        navigator.clipboard.writeText(password).then(() => {
+          const message = lang.passwordGeneratorCopied;
+          alert(message);
+        });
+      }
+    };
+
+    window.checkPasswordStrength = function() {
+      const password = document.getElementById('passwordCheckInput').value;
+      const resultDiv = document.getElementById('strengthResult');
+      
+      const lang = window.currentLang && window[window.currentLang] ? window[window.currentLang] : window.ar;
+      
+      if (!password) {
+        resultDiv.textContent = lang.passwordGeneratorEnterPasswordPrompt;
+        resultDiv.style.color = 'var(--gray)';
+        return;
+      }
+
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (password.length >= 12) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[a-z]/.test(password)) score++;
+      if (/[0-9]/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+
+      let strength = '';
+      let color = '';
+      if (score <= 2) {
+        strength = lang.passwordGeneratorStrengthVeryWeak;
+        color = '#ff4444';
+      } else if (score <= 3) {
+        strength = lang.passwordGeneratorStrengthWeak;
+        color = '#ff8800';
+      } else if (score <= 4) {
+        strength = lang.passwordGeneratorStrengthMedium;
+        color = '#ffff00';
+      } else if (score <= 5) {
+        strength = lang.passwordGeneratorStrengthStrong;
+        color = '#00ff00';
+      } else {
+        strength = lang.passwordGeneratorStrengthVeryStrong;
+        color = '#00ffff';
+      }
+
+      resultDiv.textContent = `${lang.passwordGeneratorStrengthLabel} ${strength}`;
+      resultDiv.style.color = color;
+    };
+
+    function updateLengthValue() {
+      const lengthInput = document.getElementById('passwordLength');
+      const lengthValue = document.getElementById('lengthValue');
+      if (lengthInput && lengthValue) {
+        lengthValue.textContent = lengthInput.value;
+        lengthInput.addEventListener('input', () => {
+          lengthValue.textContent = lengthInput.value;
+        });
+      }
+    }
+
     window.closeAllModals = function() {
       closeAllModalsInternal();
     };
@@ -771,6 +920,72 @@
     </div>
   </div>
 
+  <!-- Password Generator Modal -->
+  <div id="passwordGeneratorModal" class="demo-modal img-compressor-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1" style="display:none;">
+    <div class="demo-modal-header">
+      <span class="demo-modal-title" data-i18n="passwordGeneratorTitle">Password Generator & Strength Checker</span>
+      <button class="close-demo" type="button" onclick="closePasswordGeneratorModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="img-modal-body">
+      <p class="img-compressor-desc" data-i18n="passwordGeneratorDesc">مولد كلمات مرور آمنة ومتقدم يعمل بالكامل على المتصفح. أنشئ كلمات مرور قوية مع خيارات مخصصة للطول والأحرف، وتحقق من قوة كلمات المرور الموجودة.</p>
+      
+      <div class="img-modal-actions">
+        <button type="button" class="img-btn primary" onclick="generatePassword()">
+          <i class="fas fa-key"></i>
+          <span data-i18n="passwordGeneratorGenerate">إنشاء كلمة مرور</span>
+        </button>
+        <button type="button" class="img-btn secondary" onclick="copyPassword()">
+          <i class="fas fa-copy"></i>
+          <span data-i18n="passwordGeneratorCopy">نسخ</span>
+        </button>
+      </div>
+
+      <div class="img-preview-wrapper">
+        <h4 data-i18n="passwordGeneratorResult">كلمة المرور المولدة</h4>
+        <div class="img-preview" id="passwordDisplay" style="font-family: monospace; font-size: 1.2rem; word-break: break-all; text-align: center;">
+          <span data-i18n="passwordGeneratorPlaceholder">اضغط على "إنشاء كلمة مرور" لبدء</span>
+        </div>
+      </div>
+
+      <div class="img-result-wrapper">
+        <h4 data-i18n="passwordGeneratorOptions">خيارات التوليد</h4>
+        <div class="img-result">
+          <div class="img-result-row">
+            <span class="label" data-i18n="passwordGeneratorLength">الطول:</span>
+            <input type="range" id="passwordLength" min="8" max="32" value="16" style="flex: 1; margin: 0 10px;">
+            <span id="lengthValue">16</span>
+          </div>
+          <div class="img-result-row">
+            <span class="label" data-i18n="passwordGeneratorUppercase">أحرف كبيرة:</span>
+            <input type="checkbox" id="includeUppercase" checked>
+          </div>
+          <div class="img-result-row">
+            <span class="label" data-i18n="passwordGeneratorLowercase">أحرف صغيرة:</span>
+            <input type="checkbox" id="includeLowercase" checked>
+          </div>
+          <div class="img-result-row">
+            <span class="label" data-i18n="passwordGeneratorNumbers">أرقام:</span>
+            <input type="checkbox" id="includeNumbers" checked>
+          </div>
+          <div class="img-result-row">
+            <span class="label" data-i18n="passwordGeneratorSymbols">رموز:</span>
+            <input type="checkbox" id="includeSymbols" checked>
+          </div>
+        </div>
+      </div>
+
+      <div class="img-result-wrapper">
+        <h4 data-i18n="passwordGeneratorStrengthCheck">فحص قوة كلمة المرور</h4>
+        <input type="password" id="passwordCheckInput" placeholder="" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--primary); margin-bottom: 10px;">
+        <button type="button" class="img-btn secondary" onclick="checkPasswordStrength()" style="width: 100%;">
+          <i class="fas fa-search"></i>
+          <span data-i18n="passwordGeneratorCheckStrength">فحص القوة</span>
+        </button>
+        <div id="strengthResult" style="margin-top: 10px; text-align: center;"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- QR Code Modal -->
 <div id="qrModal" class="demo-modal" style="display:none;">
   <div class="demo-modal-header">
@@ -791,7 +1006,7 @@
       <button class="qr-btn" onclick="stopScannerModal()" style="background:#ff7e5f; margin-left:8px;"><i class="fas fa-stop"></i> إيقاف المسح</button>
     </div>
     <div class="qr-footer" style="margin-top:32px;color:#aaa;font-size:0.95rem;text-align:center;opacity:0.8;">
-      &copy; RAM 2025 | <a href="https://github.com/rami0702" target="_blank">GitHub</a>
+      &copy; RAM™ 2025 | <a href="https://github.com/rami0702" target="_blank">GitHub</a>
     </div>
   </div>
 </div>
@@ -814,7 +1029,7 @@
 
         <div class="footer-right">
           <p class="trademark">
-            <span data-i18n="trademarkText_line1">RAM - جميع الحقوق محفوظة</span><br>
+            <span data-i18n="trademarkText_line1">RAM™ - جميع الحقوق محفوظة</span><br>
             <span data-i18n="trademarkText_line2">تم التطوير بواسطة RAM</span>
           </p>
           <div class="social-links">
