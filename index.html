@@ -372,6 +372,31 @@
             </div>
           </div>
         </div>
+
+        <!-- Web Vulnerability Scanner Project -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="images/web-vuln-scanner-card.png" class="project-screenshot" alt="Web Vulnerability Scanner Demo">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="webVulnScannerTitle">Web Vulnerability Scanner</h3>
+            <p class="project-desc" data-i18n="webVulnScannerDesc">
+              أداة بسيطة تفحص مواقع الويب بحثاً عن ثغرات شائعة مثل XSS أو SQL Injection، مع تقرير مفصل.
+            </p>
+            <div class="project-links">
+              <a href="javascript:void(0)" onclick="showWebVulnScannerModal()" class="project-link">
+                <i class="fas fa-search"></i> <span data-i18n="webVulnScannerTry">تجربة مباشرة</span>
+              </a>
+              <a href="https://github.com/rami0702/WVS" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="webVulnScannerCode">عرض الكود</span>
+              </a>
+            </div>
+            <div class="project-security-note">
+              <i class="fas fa-lock"></i>
+              <span data-i18n="projectSecurityNote">100% Secure - No data leaves your browser</span>
+            </div>
+          </div>
+        </div>
     </section>
 
 <!-- Contact Section -->
@@ -726,6 +751,177 @@
       toggleOverlay(false);
     };
 
+    window.showWebVulnScannerModal = function() {
+      const modal = document.getElementById('webVulnScannerModal');
+      if (!modal) return;
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      toggleOverlay(true);
+      modal.focus();
+      // Set placeholder based on current language
+      const urlInput = document.getElementById('vulnScanUrl');
+      if (urlInput && window.currentLang && window[window.currentLang]) {
+        urlInput.placeholder = window[window.currentLang].webVulnScannerUrl;
+      }
+    };
+
+    window.closeWebVulnScannerModal = function() {
+      const modal = document.getElementById('webVulnScannerModal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      toggleOverlay(false);
+    };
+
+    window.scanWebsite = function() {
+      const url = document.getElementById('vulnScanUrl').value.trim();
+      const resultsDiv = document.getElementById('scanResults');
+      
+      // Get current language pack
+      const getLanguagePack = () => {
+        const lang = (typeof currentLang !== 'undefined' && currentLang) || localStorage.getItem('preferredLanguage') || 'ar';
+        return window[lang] || window.ar || {};
+      };
+      
+      const lang = getLanguagePack();
+
+      if (!url) {
+        resultsDiv.innerHTML = `<span style="color: #ff4444;">${lang.webVulnScannerUrlPrompt || 'Please enter a valid URL'}</span>`;
+        return;
+      }
+
+      // Basic URL validation
+      let urlObj;
+      try {
+        urlObj = new URL(url);
+      } catch (e) {
+        resultsDiv.innerHTML = `<span style="color: #ff4444;">${lang.webVulnScannerInvalidUrl || 'Invalid URL'}</span>`;
+        return;
+      }
+
+      // Show scanning message
+      resultsDiv.innerHTML = `<span style="color: #ffff00;">${lang.webVulnScannerScanning || 'Scanning for security issues...'}</span>`;
+
+      // Security checks array
+      let securityIssues = [];
+      let securityGood = [];
+
+      // 1. HTTPS Check
+      if (urlObj.protocol !== 'https:') {
+        securityIssues.push(lang.webVulnScannerHttpsWarning || '⚠️ Uses insecure HTTP - HTTPS is recommended');
+      } else {
+        securityGood.push(lang.webVulnScannerHttpsGood || '✅ Uses secure HTTPS');
+      }
+
+      // 2. URL Pattern Analysis for common vulnerabilities
+      if (/'|("|;)|(\b(union|select|insert|update|delete|drop|create|alter)\b)/i.test(url)) {
+        securityIssues.push(lang.webVulnScannerSqlInjection || '🚨 SQL Injection - Potential SQL injection patterns in URL');
+      }
+
+      if (/[<>"'&]/i.test(url)) {
+        securityIssues.push(lang.webVulnScannerXss || '🚨 XSS - Potential cross-site scripting patterns in URL');
+      }
+
+      if (/\.\./.test(url)) {
+        securityIssues.push(lang.webVulnScannerDirectoryTraversal || '🚨 Directory Traversal - Directory traversal patterns in URL');
+      }
+
+      if (/[;&|`$()]/i.test(url)) {
+        securityIssues.push(lang.webVulnScannerCommandInjection || '🚨 Command Injection - Potential command injection patterns in URL');
+      }
+
+      // 3. Try to fetch security headers (with timeout)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+      fetch(url, {
+        method: 'HEAD',
+        mode: 'no-cors',
+        signal: controller.signal
+      })
+      .then(response => {
+        clearTimeout(timeoutId);
+        
+        // Check for basic security headers
+        const headers = response.headers;
+        
+        // Content Security Policy
+        if (!headers.get('content-security-policy') && !headers.get('content-security-policy-report-only')) {
+          securityIssues.push(lang.webVulnScannerNoCsp || '⚠️ No Content Security Policy (CSP)');
+        } else {
+          securityGood.push(lang.webVulnScannerCspGood || '✅ Content Security Policy present');
+        }
+
+        // HSTS
+        if (!headers.get('strict-transport-security')) {
+          securityIssues.push(lang.webVulnScannerNoHsts || '⚠️ No HTTP Strict Transport Security (HSTS)');
+        } else {
+          securityGood.push(lang.webVulnScannerHstsGood || '✅ HTTP Strict Transport Security present');
+        }
+
+        // X-Frame-Options
+        if (!headers.get('x-frame-options')) {
+          securityIssues.push(lang.webVulnScannerNoXFrame || '⚠️ No X-Frame-Options (Clickjacking protection)');
+        } else {
+          securityGood.push(lang.webVulnScannerXFrameGood || '✅ X-Frame-Options present');
+        }
+
+        // X-Content-Type-Options
+        if (!headers.get('x-content-type-options')) {
+          securityIssues.push(lang.webVulnScannerNoXContentType || '⚠️ No X-Content-Type-Options');
+        } else {
+          securityGood.push(lang.webVulnScannerXContentTypeGood || '✅ X-Content-Type-Options present');
+        }
+
+        // Referrer Policy
+        if (!headers.get('referrer-policy')) {
+          securityIssues.push(lang.webVulnScannerNoReferrer || '⚠️ No Referrer Policy');
+        } else {
+          securityGood.push(lang.webVulnScannerReferrerGood || '✅ Referrer Policy present');
+        }
+
+        displayResults(securityIssues, securityGood, lang);
+      })
+      .catch(error => {
+        clearTimeout(timeoutId);
+        if (error.name === 'AbortError') {
+          securityIssues.push(lang.webVulnScannerTimeout || '⚠️ Scan timed out - website may be slow or unresponsive');
+        } else {
+          securityIssues.push(lang.webVulnScannerConnectionError || '⚠️ Could not connect to website - network or CORS issues');
+        }
+        displayResults(securityIssues, securityGood, lang);
+      });
+
+      function displayResults(issues, good, lang) {
+        let html = '';
+
+        if (issues.length > 0) {
+          html += `<div style="color: #ff4444; text-align: left; margin-bottom: 15px;">
+            <strong>${lang.webVulnScannerIssuesFound || '⚠️ Potential Security Issues:'}</strong><br>
+            ${issues.map(issue => `• ${issue}`).join('<br>')}
+          </div>`;
+        }
+
+        if (good.length > 0) {
+          html += `<div style="color: #00ff00; text-align: left; margin-bottom: 15px;">
+            <strong>${lang.webVulnScannerGoodPoints || '✅ Security Best Practices:'}</strong><br>
+            ${good.map(g => `• ${g}`).join('<br>')}
+          </div>`;
+        }
+
+        if (issues.length === 0 && good.length === 0) {
+          html = `<span style="color: #00ff00;">${lang.webVulnScannerNoIssues || 'No obvious security issues detected'}</span>`;
+        }
+
+        html += `<div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.9em;">
+          <strong>📋 ${lang.webVulnScannerDisclaimer || 'Note: This is a basic scan only. For comprehensive security testing, use professional tools like OWASP ZAP or Burp Suite.'}</strong>
+        </div>`;
+
+        resultsDiv.innerHTML = html;
+      }
+    };
+
     window.generatePassword = function() {
       const length = document.getElementById('passwordLength').value;
       const includeUppercase = document.getElementById('includeUppercase').checked;
@@ -982,6 +1178,37 @@
           <span data-i18n="passwordGeneratorCheckStrength">فحص القوة</span>
         </button>
         <div id="strengthResult" style="margin-top: 10px; text-align: center;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Web Vulnerability Scanner Modal -->
+  <div id="webVulnScannerModal" class="demo-modal img-compressor-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1" style="display:none;">
+    <div class="demo-modal-header">
+      <span class="demo-modal-title" data-i18n="webVulnScannerTitle">Web Vulnerability Scanner</span>
+      <button class="close-demo" type="button" onclick="closeWebVulnScannerModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="img-modal-body">
+      <p class="img-compressor-desc" data-i18n="webVulnScannerDesc">أداة بسيطة تفحص مواقع الويب بحثاً عن ثغرات شائعة مثل XSS أو SQL Injection، مع تقرير مفصل.</p>
+      
+      <div class="img-modal-actions">
+        <input type="url" id="vulnScanUrl" placeholder="https://example.com" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--primary); margin-bottom: 10px;" data-i18n-placeholder="webVulnScannerUrl">
+        <button type="button" class="img-btn primary" onclick="scanWebsite()" style="width: 100%;">
+          <i class="fas fa-search"></i>
+          <span data-i18n="webVulnScannerScan">فحص الموقع</span>
+        </button>
+      </div>
+
+      <div class="img-result-wrapper">
+        <h4 data-i18n="webVulnScannerResults">نتائج الفحص</h4>
+        <div class="img-result" id="scanResults" style="text-align: center; color: var(--gray);">
+          <span data-i18n="webVulnScannerNoVulns">لم يتم العثور على ثغرات شائعة</span>
+        </div>
+      </div>
+
+      <div class="project-security-note" style="margin-top: 20px;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span data-i18n="webVulnScannerNote">هذا فحص أساسي فقط، ليس بديلاً عن فحص أمني احترافي</span>
       </div>
     </div>
   </div>
