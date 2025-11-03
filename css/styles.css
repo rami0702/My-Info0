@@ -198,149 +198,6 @@ body.light-mode .loader-wrapper {
   100% { width: 100%; }
 }
 
-/* Visitor Stats Widget */
-.visitor-stats-widget {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 1000;
-  animation: slideInRight 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-}
-
-@keyframes slideInRight {
-  from {
-    transform: translateX(120%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.visitor-stat {
-  background: var(--card-bg);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(110, 69, 226, 0.2);
-  border-radius: 12px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 180px;
-  transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.visitor-stat:hover {
-  transform: translateX(-5px);
-  border-color: var(--primary);
-  box-shadow: 0 6px 25px rgba(110, 69, 226, 0.3);
-}
-
-.visitor-stat i {
-  font-size: 1.4rem;
-  color: var(--primary);
-  transition: transform 0.3s ease;
-}
-
-.visitor-stat:hover i {
-  transform: scale(1.15);
-}
-
-.visitor-stat .stat-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.visitor-stat .stat-value {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--light);
-  line-height: 1;
-}
-
-.visitor-stat .stat-label {
-  font-size: 0.75rem;
-  color: var(--gray);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 500;
-}
-
-/* Live Indicator Animation */
-.visitor-stat.live .live-indicator {
-  color: #00ff88;
-  animation: pulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px #00ff88);
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.2);
-  }
-}
-
-/* Responsive Design for Visitor Stats */
-@media (max-width: 768px) {
-  .visitor-stats-widget {
-    bottom: 20px;
-    right: 20px;
-    gap: 10px;
-  }
-  
-  .visitor-stat {
-    padding: 10px 14px;
-    min-width: 160px;
-  }
-  
-  .visitor-stat i {
-    font-size: 1.2rem;
-  }
-  
-  .visitor-stat .stat-value {
-    font-size: 1.1rem;
-  }
-  
-  .visitor-stat .stat-label {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .visitor-stats-widget {
-    bottom: 15px;
-    right: 15px;
-    gap: 8px;
-  }
-  
-  .visitor-stat {
-    padding: 8px 12px;
-    min-width: 140px;
-  }
-  
-  .visitor-stat i {
-    font-size: 1.1rem;
-  }
-  
-  .visitor-stat .stat-value {
-    font-size: 1rem;
-  }
-  
-  .visitor-stat .stat-label {
-    font-size: 0.65rem;
-  }
-}
-
 /* Theme Toggle Button */
 .theme-toggle {
   position: fixed;
@@ -1656,17 +1513,17 @@ footer {
   text-align: center;
 }
 .demo-modal input.qr-input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid var(--primary);
-  margin-bottom: 16px;
-  font-size: 1.1rem;
-  background: rgba(255,255,255,0.13);
-  border-radius: 50%;
-  padding: 7px;
-  margin-left: 0;
-  margin-right: 0;
+width: 100%; 
+padding: 12px; 
+border-radius: 8px; 
+border: 1px solid var(--primary); 
+margin-bottom: 16px; 
+font-size: 1.5rem; 
+background: rgba(255,255,255,0.13); 
+border-radius: 50%; 
+padding: 5px; 
+margin-left: 0; 
+margin-right: 0;
 }
 .demo-modal .qr-btn {
   background: linear-gradient(45deg, var(--primary), var(--accent));
