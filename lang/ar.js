@@ -13,6 +13,8 @@ const ar = {
     expertiseData: "مدفوع بالبيانات",
     expertiseDataDesc: "استخدام تحليلات البيانات لتحسين الأداء واكتشاف الأخطاء",
 
+    expertiseShowcase: "الخبرات",
+
     imgCompressorTitle: "ضاغط ومحسن الصور",
     imgCompressorDesc: "أداة لضغط وتحسين الصور مباشرة من المتصفح، تدعم السحب والإفلات، وتعرض حجم الصورة قبل وبعد الضغط، مع إمكانية تحميل الصورة المضغوطة.",
     imgCompressorTry: "تجربة مباشرة",
@@ -147,8 +149,8 @@ Object.assign(ar, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'لوحة التحليلات',
     dashboardDesc: 'لوحة تحكم تفاعلية لتحليل البيانات في الوقت الفعلي وعرضها بشكل مرئي.',
-    trademarkText: 'RAM™ - جميع الحقوق محفوظة | تم التطوير بواسطة فريق RAM',
-    trademarkText_line1: 'RAM™ - جميع الحقوق محفوظة',
+    trademarkText: 'RAM - جميع الحقوق محفوظة | تم التطوير بواسطة فريق RAM',
+    trademarkText_line1: 'RAM - جميع الحقوق محفوظة',
     trademarkText_line2: 'تم التطوير بواسطة فريق RAM',
     
     // Statistics Section
@@ -240,4 +242,29 @@ Object.assign(ar, {
     gameOptimizerError: 'حدث خطأ!',
     gameOptimizerWarning: 'تحذير: هذا سيقوم بتعديل إعدادات النظام',
     gameOptimizerNote: 'ملاحظة: تأكد من عمل نسخة احتياطية قبل التحسين',
+    memoryOptimizerTitle: 'محسن الذاكرة الذكي',
+    memoryOptimizerDesc: 'أداة ذكية لتحليل وتحسين استخدام الذاكرة. تراقب العمليات النشطة، تحرر الموارد المستخدمة بشكل غير فعال، وتوفر مراقبة في الوقت الفعلي.',
+    memoryOptimizerTry: 'تجربة مباشرة',
+    memoryOptimizerCode: 'استعراض الكود',
+    memoryOptimizerDownload: 'تحميل البرنامج',
+    memoryOptimizerOptimize: 'تحسين الذاكرة',
+    memoryOptimizerAnalyze: 'تحليل الذاكرة',
+    memoryOptimizerMonitor: 'مراقبة فورية',
+    memoryOptimizerStatus: 'الحالة:',
+    memoryOptimizerReady: 'جاهز',
+    memoryOptimizerOptimizing: 'جاري التحسين...',
+    memoryOptimizerAnalyzing: 'جاري التحليل...',
+    memoryOptimizerMonitoring: 'جاري المراقبة...',
+    memoryOptimizerSuccess: 'تم التحسين بنجاح!',
+    memoryOptimizerError: 'حدث خطأ!',
+    memoryOptimizerWarning: 'تحذير: هذا سيقوم بتحسين استخدام الذاكرة',
+    memoryOptimizerNote: 'يعمل محلياً فقط - لا يحتاج اتصال بالإنترنت',
+    memoryOptimizerGUI: 'تشغيل واجهة المستخدم الرسومية',
+});
+
+// QR modal buttons and headings
+Object.assign(window.ar, {
+    qrScanCamera: 'مسح رمز QR بالكاميرا',
+    qrStartScan: 'بدء المسح',
+    qrStopScan: 'إيقاف المسح'
 });
