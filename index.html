@@ -66,28 +66,6 @@
 <!-- Animated Globe Background -->
 <div id="globeContainer"></div>
 
-<!-- Visitor Stats Widget -->
-<div class="visitor-stats-widget">
-  <div class="visitor-stat">
-    <i class="fas fa-users"></i>
-    <div class="stat-info">
-      <span class="stat-value" id="totalVisitors">
-        <i class="fas fa-spinner fa-spin"></i>
-      </span>
-      <span class="stat-label" data-i18n="total_visitors">Total Visitors</span>
-    </div>
-  </div>
-  <div class="visitor-stat live">
-    <i class="fas fa-circle live-indicator"></i>
-    <div class="stat-info">
-      <span class="stat-value" id="liveVisitors">
-        <i class="fas fa-spinner fa-spin"></i>
-      </span>
-      <span class="stat-label" data-i18n="live_visitors">Online Now</span>
-    </div>
-  </div>
-</div>
-
 <!-- Theme Toggle Button -->
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
   <i class="fas fa-moon"></i>
@@ -793,7 +771,7 @@
   </div>
   <div style="padding:1rem;">
     <div class="qr-demo-desc" data-i18n="qrProjectDesc" style="margin-bottom:18px;color:#aaa;font-size:1.1rem;text-align:center;"></div>
-    <input type="text" id="qrTextModal" class="qr-input" placeholder="أدخل نص أو رابط هنا..." style="margin-bottom:16px;width:100%;">
+    <input type="text" id="qrTextModal" class="qr-input" placeholder="Enter text or link here..." style="margin-bottom:16px;width:100%;">
     <button class="qr-btn" onclick="generateQRModal()"><i class="fas fa-qrcode"></i> <span data-i18n="qrTry">إنشاء رمز QR</span></button>
     <div id="qrcodeModal"></div>
     <hr style="margin:32px 0;">
