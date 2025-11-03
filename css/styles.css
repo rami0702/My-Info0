@@ -1788,3 +1788,15 @@ margin-right: 0;
   background: linear-gradient(var(--primary), var(--accent));
   border-radius: 4px;
 }
+/* RAM Security Watermark Effect */
+body::before {
+  content: "RAM CYBER DEFENSE";
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.9rem;
+  color: rgb(1, 0, 3);
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: -1;
+}
