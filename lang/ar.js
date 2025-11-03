@@ -147,7 +147,7 @@ Object.assign(ar, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'لوحة التحليلات',
     dashboardDesc: 'لوحة تحكم تفاعلية لتحليل البيانات في الوقت الفعلي وعرضها بشكل مرئي.',
-    trademarkText: 'RAM™ - جميع الحقوق محفوظة | تم التطوير بواسطة فريق RAM',
+    trademarkText: 'RAM™ - جميع الحقوق محفوظة | تم التطوير بواسطة  RAM',
     trademarkText_line1: 'RAM™ - جميع الحقوق محفوظة',
     trademarkText_line2: 'تم التطوير بواسطة فريق RAM',
     
