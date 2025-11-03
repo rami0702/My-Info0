@@ -147,8 +147,8 @@ Object.assign(ar, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'لوحة التحليلات',
     dashboardDesc: 'لوحة تحكم تفاعلية لتحليل البيانات في الوقت الفعلي وعرضها بشكل مرئي.',
-    trademarkText: 'RAM - جميع الحقوق محفوظة | تم التطوير بواسطة  RAM',
-    trademarkText_line1: 'RAM - جميع الحقوق محفوظة',
+    trademarkText: 'RAM™ - جميع الحقوق محفوظة | تم التطوير بواسطة فريق RAM',
+    trademarkText_line1: 'RAM™ - جميع الحقوق محفوظة',
     trademarkText_line2: 'تم التطوير بواسطة فريق RAM',
     
     // Statistics Section
@@ -158,5 +158,33 @@ Object.assign(ar, {
     
     // Visitor Stats
     total_visitors: 'إجمالي الزوار',
-    live_visitors: 'متصل الآن'
+    live_visitors: 'متصل الآن',
+
+    // Password Generator
+    passwordGeneratorTitle: 'مولد كلمات المرور وفاحص القوة',
+    passwordGeneratorDesc: 'مولد كلمات مرور آمنة ومتقدم يعمل بالكامل على المتصفح. أنشئ كلمات مرور قوية مع خيارات مخصصة للطول والأحرف، وتحقق من قوة كلمات المرور الموجودة.',
+    passwordGeneratorTry: 'تجربة مباشرة',
+    passwordGeneratorCode: 'عرض الكود',
+    passwordGeneratorGenerate: 'إنشاء كلمة مرور',
+    passwordGeneratorCopy: 'نسخ',
+    passwordGeneratorResult: 'كلمة المرور المولدة',
+    passwordGeneratorPlaceholder: 'اضغط على "إنشاء كلمة مرور" لبدء',
+    passwordGeneratorOptions: 'خيارات التوليد',
+    passwordGeneratorLength: 'الطول:',
+    passwordGeneratorUppercase: 'أحرف كبيرة:',
+    passwordGeneratorLowercase: 'أحرف صغيرة:',
+    passwordGeneratorNumbers: 'أرقام:',
+    passwordGeneratorSymbols: 'رموز:',
+    passwordGeneratorStrengthCheck: 'فحص قوة كلمة المرور',
+    passwordGeneratorCheckStrength: 'فحص القوة',
+    passwordGeneratorEnterPassword: 'أدخل كلمة مرور لفحص قوتها',
+    passwordGeneratorCopied: 'تم نسخ كلمة المرور إلى الحافظة',
+    passwordGeneratorStrengthVeryWeak: 'ضعيفة جداً',
+    passwordGeneratorStrengthWeak: 'ضعيفة',
+    passwordGeneratorStrengthMedium: 'متوسطة',
+    passwordGeneratorStrengthStrong: 'قوية',
+    passwordGeneratorStrengthVeryStrong: 'قوية جداً',
+    passwordGeneratorStrengthLabel: 'قوة كلمة المرور:',
+    passwordGeneratorEnterPasswordPrompt: 'يرجى إدخال كلمة مرور',
+    passwordGeneratorSelectType: 'يرجى اختيار نوع واحد على الأقل من الأحرف'
 });
