@@ -92,82 +92,6 @@ function initStatsObserver() {
     }, { threshold: 0.5 });
 }
 
-// Real Visitor Counter using CountAPI
-async function initVisitorCounter() {
-    const totalVisitorsEl = document.getElementById('totalVisitors');
-    const liveVisitorsEl = document.getElementById('liveVisitors');
-    
-    // Create a unique namespace for your site (ramdev.site)
-    const namespace = 'ramdev-site';
-    const key = 'visits';
-    const countAPIUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
-    
-    try {
-        // Fetch and increment total visitors from CountAPI
-        const response = await fetch(countAPIUrl);
-        const data = await response.json();
-        
-        if (data && data.value) {
-            // Remove loading spinner and animate total visitors counter with real count
-            totalVisitorsEl.innerHTML = '0';
-            animateCountUp(totalVisitorsEl, data.value, 1500);
-        } else {
-            // Fallback to localStorage if API fails
-            let fallbackCount = parseInt(localStorage.getItem('totalVisitors')) || 0;
-            fallbackCount++;
-            localStorage.setItem('totalVisitors', fallbackCount);
-            totalVisitorsEl.innerHTML = '0';
-            animateCountUp(totalVisitorsEl, fallbackCount, 1500);
-        }
-    } catch (error) {
-        console.log('CountAPI unavailable, using fallback');
-        // Fallback to localStorage if API is unavailable
-        let fallbackCount = parseInt(localStorage.getItem('totalVisitors')) || 0;
-        fallbackCount++;
-        localStorage.setItem('totalVisitors', fallbackCount);
-        totalVisitorsEl.innerHTML = '0';
-        animateCountUp(totalVisitorsEl, fallbackCount, 1500);
-    }
-    
-    // Real-time live visitors estimation
-    // Fetch current visitor count and estimate active users
-    const liveAPIUrl = `https://api.countapi.xyz/get/${namespace}/${key}`;
-    
-    async function updateLiveVisitors() {
-        try {
-            const response = await fetch(liveAPIUrl);
-            const data = await response.json();
-            
-            if (data && data.value) {
-                // Remove loading spinner on first load
-                if (liveVisitorsEl.querySelector('.fa-spinner')) {
-                    liveVisitorsEl.innerHTML = '0';
-                }
-                
-                // Estimate live visitors (1-3% of total or min 1-5)
-                const totalCount = data.value;
-                let liveEstimate = Math.max(1, Math.floor(totalCount * 0.02)); // 2% of total
-                liveEstimate = Math.min(liveEstimate, Math.floor(Math.random() * 5) + 1); // Random 1-5 if small
-                
-                animateCountUp(liveVisitorsEl, liveEstimate, 800);
-            }
-        } catch (error) {
-            // Remove loading spinner and fallback to random if API fails
-            if (liveVisitorsEl.querySelector('.fa-spinner')) {
-                liveVisitorsEl.innerHTML = '0';
-            }
-            const liveVisitors = Math.floor(Math.random() * 5) + 1;
-            animateCountUp(liveVisitorsEl, liveVisitors, 800);
-        }
-    }
-    
-    // Initial live count
-    await updateLiveVisitors();
-    
-    // Update live visitors every 15 seconds
-    setInterval(updateLiveVisitors, 15000);
-}
-
 // Observe stats section when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initStatsObserver();
@@ -175,9 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statsSection && statsObserver) {
         statsObserver.observe(statsSection);
     }
-    
-    // Initialize visitor counter
-    initVisitorCounter();
 });
 
 // Initialize Globe
@@ -272,13 +193,24 @@ function setLanguage(lang) {
         }
     };
 
-    // Apply to elements with data-i18n
+    // Apply to elements with data-i18n (يشمل عناصر المودال الخاصة بـ Image Compressor)
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (key && (key in texts)) {
             applyText(element, texts[key]);
         }
     });
+
+    // تحديث ترجمة زر وضغط الصورة داخل المودال إذا كان موجوداً
+    var imgCompressorModal = document.getElementById('imgCompressorModal');
+    if (imgCompressorModal) {
+        var modalTitle = imgCompressorModal.querySelector('.demo-modal-title[data-i18n="imgCompressorTitle"]');
+        var modalDesc = imgCompressorModal.querySelector('.img-compressor-desc[data-i18n="imgCompressorDesc"]');
+        var compressBtn = imgCompressorModal.querySelector('.img-btn span[data-i18n="imgCompressorCompress"]');
+        if (modalTitle && texts.imgCompressorTitle) modalTitle.textContent = texts.imgCompressorTitle;
+        if (modalDesc && texts.imgCompressorDesc) modalDesc.textContent = texts.imgCompressorDesc;
+        if (compressBtn && texts.imgCompressorCompress) compressBtn.textContent = texts.imgCompressorCompress;
+    }
 
     // Support translating attributes via data-i18n-attr="attrName:key"
     document.querySelectorAll('[data-i18n-attr]').forEach(el => {
@@ -487,10 +419,99 @@ function showDemo() {
 }
 
 // Smooth scroll for navigation
+// دوال فتح وإغلاق نافذة العرض التجريبي الخاصة بـ RAM CYBER DEFENSE Elite
+// نافذة العرض التفاعلي القديمة الخاصة بـ RAM CYBER DEFENSE Elite
+function showRamDemoModal() {
+    const modal = document.getElementById('ramDemoModal');
+    const overlay = document.querySelector('.demo-overlay');
+    const resultsPanel = modal.querySelector('.demo-results');
+    const closeBtn = modal.querySelector('.close-demo');
+    let scanInterval;
+    let filesScanned = 0;
+    let threatsFound = 0;
+
+    function updateStats() {
+        modal.querySelector('.files-count').textContent = filesScanned;
+        modal.querySelector('.threats-count').textContent = threatsFound;
+    }
+
+    function appendLog(message, color = '#00ff00') {
+        const timestamp = new Date().toLocaleTimeString();
+        resultsPanel.innerHTML += `[${timestamp}] <span style="color: ${color}">${message}</span>\n`;
+        resultsPanel.scrollTop = resultsPanel.scrollHeight;
+    }
+
+    function simulateScan(type) {
+        clearInterval(scanInterval);
+        filesScanned = 0;
+        threatsFound = 0;
+        resultsPanel.innerHTML = '';
+        const scanMessages = {
+            'quick': {
+                start: currentLang === 'ar' ? 'بدء الفحص السريع...' : 'Starting Quick Scan...',
+                progress: currentLang === 'ar' ? 'فحص الملفات...' : 'Scanning files...',
+                complete: currentLang === 'ar' ? 'اكتمل الفحص السريع' : 'Quick Scan Complete'
+            },
+            'deep': {
+                start: currentLang === 'ar' ? 'بدء التحليل العميق...' : 'Starting Deep Analysis...',
+                progress: currentLang === 'ar' ? 'تحليل النظام...' : 'Analyzing system...',
+                complete: currentLang === 'ar' ? 'اكتمل التحليل العميق' : 'Deep Analysis Complete'
+            }
+        };
+        appendLog(scanMessages[type].start);
+        modal.querySelector('.status-text').textContent = 'Scanning';
+        scanInterval = setInterval(() => {
+            filesScanned += Math.floor(Math.random() * 100);
+            if (Math.random() > 0.8) {
+                threatsFound++;
+                appendLog('⚠️ Potential threat detected!', '#ff0000');
+            }
+            appendLog(scanMessages[type].progress);
+            updateStats();
+            if (filesScanned >= 1000) {
+                clearInterval(scanInterval);
+                appendLog(scanMessages[type].complete, '#00ffff');
+                modal.querySelector('.status-text').textContent = 'Ready';
+            }
+        }, 1000);
+    }
+
+    // Event Listeners
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+        clearInterval(scanInterval);
+    };
+    modal.querySelector('.quick-scan').onclick = function() { simulateScan('quick'); };
+    modal.querySelector('.deep-analysis').onclick = function() { simulateScan('deep'); };
+    modal.querySelectorAll('.demo-button').forEach(btn => {
+        if (!btn.classList.contains('quick-scan') && !btn.classList.contains('deep-analysis')) {
+            btn.onclick = function() {
+                appendLog(currentLang === 'ar' ? 'هذه الميزة متوفرة فقط في النسخة الكاملة' : 'This feature is only available in the full version', '#ffff00');
+            };
+        }
+    });
+    // Show modal
+    modal.style.display = 'block';
+    overlay.style.display = 'block';
+    resultsPanel.innerHTML = '';
+    appendLog('CYBERSHIELD ELITE v4.0 initialized...', '#00ffff');
+    appendLog('System ready for scan.', '#00ffff');
+    updateStats();
+    modal.querySelector('.status-text').textContent = 'Ready';
+}
+function closeRamDemoModal() {
+    var modal = document.getElementById('ramDemoModal');
+    var overlay = document.querySelector('.demo-overlay');
+    if (modal && overlay) {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+}
+// Smooth scroll for navigation
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize language
     setLanguage(currentLang);
-    
     // Initialize globe with safe fallback.
     try {
         if (typeof Globe === 'function') {
