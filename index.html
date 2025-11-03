@@ -278,7 +278,7 @@
         <!-- Analytics Dashboard -->
         <div class="project-card">
       <div class="project-image">
-        <img src="images/image1.png"
+        <img src="bc2f6e19-b3f2-4e31-8521-e39a3e6d3297.png"
            alt="Dashboard screenshot"
            class="project-screenshot"
            data-i18n-alt="dashboardImageAlt">
@@ -394,6 +394,34 @@
             <div class="project-security-note">
               <i class="fas fa-lock"></i>
               <span data-i18n="projectSecurityNote">100% Secure - No data leaves your browser</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Performance Optimizer Project -->
+        <div class="project-card">
+          <div class="project-image">
+            <img src="images/game-optimizer-card.png" class="project-screenshot" alt="Game Performance Optimizer Demo">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="gameOptimizerTitle">Game Performance Optimizer</h3>
+            <p class="project-desc" data-i18n="gameOptimizerDesc">
+              أداة تحسين أداء الجهاز للألعاب مع تعديل إعدادات Windows وتعطيل الخدمات غير الضرورية، مع إمكانية التراجع الكامل.
+            </p>
+            <div class="project-links">
+              <a href="javascript:void(0)" onclick="showGameOptimizerModal()" class="project-link">
+                <i class="fas fa-gamepad"></i> <span data-i18n="gameOptimizerTry">تجربة مباشرة</span>
+              </a>
+              <a href="downloads/Game Performance Optimizer.ps1" download class="project-link">
+                <i class="fas fa-download"></i> <span data-i18n="gameOptimizerDownload">تحميل البرنامج</span>
+              </a>
+              <a href="https://github.com/rami0702/game-performance-optimizer" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="gameOptimizerCode">استعراض الكود</span>
+              </a>
+            </div>
+            <div class="project-security-note">
+              <i class="fas fa-shield-alt"></i>
+              <span data-i18n="gameOptimizerNote">يحتاج صلاحيات إدارية - يعمل محلياً فقط</span>
             </div>
           </div>
         </div>
@@ -922,6 +950,68 @@
       }
     };
 
+    window.showGameOptimizerModal = function() {
+      const modal = document.getElementById('gameOptimizerModal');
+      if (!modal) return;
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden', 'false');
+      toggleOverlay(true);
+      modal.focus();
+    };
+
+    window.closeGameOptimizerModal = function() {
+      const modal = document.getElementById('gameOptimizerModal');
+      if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }
+      toggleOverlay(false);
+    };
+
+    window.createGameBackup = function() {
+      const resultsDiv = document.getElementById('gameOptimizerResults');
+      const lang = (typeof currentLang !== 'undefined' && currentLang) || localStorage.getItem('preferredLanguage') || 'ar';
+      const langPack = window[lang] || window.ar || {};
+
+      resultsDiv.innerHTML = `<span style="color: #ffff00;">${langPack.gameOptimizerOptimizing || 'جاري إنشاء النسخة الاحتياطية...'}</span>`;
+
+      // Simulate backup creation
+      setTimeout(() => {
+        resultsDiv.innerHTML = `<span style="color: #00ff00;">${langPack.gameOptimizerBackupSuccess || 'تم حفظ النسخة الاحتياطية بنجاح!'}</span>`;
+      }, 2000);
+    };
+
+    window.optimizeForGaming = function() {
+      const resultsDiv = document.getElementById('gameOptimizerResults');
+      const lang = (typeof currentLang !== 'undefined' && currentLang) || localStorage.getItem('preferredLanguage') || 'ar';
+      const langPack = window[lang] || window.ar || {};
+
+      resultsDiv.innerHTML = `<span style="color: #ffff00;">${langPack.gameOptimizerOptimizing || 'جاري تحسين الأداء...'}</span>`;
+
+      // Simulate optimization process
+      setTimeout(() => {
+        resultsDiv.innerHTML = `
+          <div style="text-align: left; color: #00ff00;">
+            <strong>${langPack.gameOptimizerSuccess || 'تم التحسين بنجاح!'} ✅</strong><br>
+            <small>• تم تعطيل الخدمات غير الضرورية<br>• تم تحسين إعدادات الطاقة<br>• تم تسريع الاستجابة<br>• تم تحسين إعدادات الرسوميات</small>
+          </div>
+        `;
+      }, 3000);
+    };
+
+    window.restoreGameSettings = function() {
+      const resultsDiv = document.getElementById('gameOptimizerResults');
+      const lang = (typeof currentLang !== 'undefined' && currentLang) || localStorage.getItem('preferredLanguage') || 'ar';
+      const langPack = window[lang] || window.ar || {};
+
+      resultsDiv.innerHTML = `<span style="color: #ffff00;">${langPack.gameOptimizerRestoring || 'جاري استعادة الإعدادات...'}</span>`;
+
+      // Simulate restore process
+      setTimeout(() => {
+        resultsDiv.innerHTML = `<span style="color: #00ff00;">${langPack.gameOptimizerRestored || 'تمت استعادة الإعدادات بنجاح!'}</span>`;
+      }, 2500);
+    };
+
     window.generatePassword = function() {
       const length = document.getElementById('passwordLength').value;
       const includeUppercase = document.getElementById('includeUppercase').checked;
@@ -1209,6 +1299,51 @@
       <div class="project-security-note" style="margin-top: 20px;">
         <i class="fas fa-exclamation-triangle"></i>
         <span data-i18n="webVulnScannerNote">هذا فحص أساسي فقط، ليس بديلاً عن فحص أمني احترافي</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Performance Optimizer Modal -->
+  <div id="gameOptimizerModal" class="demo-modal img-compressor-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1" style="display:none;">
+    <div class="demo-modal-header">
+      <span class="demo-modal-title" data-i18n="gameOptimizerTitle">Game Performance Optimizer</span>
+      <button class="close-demo" type="button" onclick="closeGameOptimizerModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="img-modal-body">
+      <p class="img-compressor-desc" data-i18n="gameOptimizerDesc">أداة تحسين أداء الجهاز للألعاب مع تعديل إعدادات Windows وتعطيل الخدمات غير الضرورية، مع إمكانية التراجع الكامل.</p>
+      
+      <div class="img-modal-actions">
+        <button type="button" class="img-btn secondary" onclick="createGameBackup()" style="width: 48%; margin-right: 4%;">
+          <i class="fas fa-save"></i>
+          <span data-i18n="gameOptimizerBackup">عمل نسخة احتياطية</span>
+        </button>
+        <button type="button" class="img-btn primary" onclick="optimizeForGaming()" style="width: 48%;">
+          <i class="fas fa-rocket"></i>
+          <span data-i18n="gameOptimizerOptimize">تحسين الأداء</span>
+        </button>
+      </div>
+
+      <div class="img-modal-actions" style="margin-top: 10px;">
+        <button type="button" class="img-btn warning" onclick="restoreGameSettings()" style="width: 100%;">
+          <i class="fas fa-undo"></i>
+          <span data-i18n="gameOptimizerRestore">استعادة الإعدادات</span>
+        </button>
+      </div>
+
+      <div class="img-result-wrapper">
+        <h4 data-i18n="gameOptimizerStatus">الحالة:</h4>
+        <div class="img-result" id="gameOptimizerResults" style="text-align: center; color: var(--gray);">
+          <span data-i18n="gameOptimizerReady">جاهز</span>
+        </div>
+      </div>
+
+      <div class="project-security-note" style="margin-top: 20px;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span data-i18n="gameOptimizerWarning">تحذير: هذا سيقوم بتعديل إعدادات النظام</span>
+      </div>
+      <div class="project-security-note" style="margin-top: 10px;">
+        <i class="fas fa-info-circle"></i>
+        <span data-i18n="gameOptimizerNote">ملاحظة: تأكد من عمل نسخة احتياطية قبل التحسين</span>
       </div>
     </div>
   </div>
