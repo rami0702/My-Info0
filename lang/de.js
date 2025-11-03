@@ -133,7 +133,8 @@ Object.assign(window.de, {
     deepAnalysisLabel: 'Tiefe Analyse',
     customHuntLabel: 'Benutzerdefinierte Suche',
     nuclearLabel: 'Nukleare Reinigung',
-    guardianLabel: 'Echtzeit-Wächter'
+    guardianLabel: 'Echtzeit-Wächter',
+    projectSecurityNote: '100 % sicher – keine Daten verlassen deinen Browser'
 });
 
 // Add missing project/UI keys
