@@ -148,6 +148,7 @@ const htmlElement = document.documentElement;
 
 function setLanguage(lang) {
     currentLang = lang;
+    window.currentLang = lang; // Make it globally available
     localStorage.setItem('preferredLanguage', lang);
     
     // Set HTML dir attribute for RTL languages
