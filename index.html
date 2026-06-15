@@ -248,7 +248,7 @@
       </p>
       <div class="projects-grid">
         <!-- RAM Security Elite Project -->
-        <div class="project-card featured-project">
+        <div class="project-card featured-project" style="display: none;">
           <div class="project-image">
             <img src="images/image.png" 
                  alt="CYBERSHIELD ELITE SECURITY SUITE Interface" 
@@ -282,12 +282,12 @@
         
         <!-- Analytics Dashboard -->
         <div class="project-card">
-      <div class="project-image">
-        <img src="images/image1.png""
-           alt="Dashboard screenshot"
-           class="project-screenshot"
-           data-i18n-alt="dashboardImageAlt">
-      </div>
+          <div class="project-image">
+            <img src="images/image1.png"
+                 alt="Dashboard screenshot"
+                 class="project-screenshot"
+                 data-i18n-alt="dashboardImageAlt">
+          </div>
           <div class="project-info">
             <h3 class="project-title" data-i18n="dashboardTitle">لوحة التحليلات</h3>
             <p class="project-desc" data-i18n="dashboardDesc">
@@ -403,8 +403,33 @@
           </div>
         </div>
 
-        <!-- Game Performance Optimizer Project -->
+        <!-- Age Calculator & Birthday Countdown Project -->
         <div class="project-card">
+          <div class="project-image">
+            <img src="images/age-calculator-card.png" class="project-screenshot" alt="Age Calculator & Birthday Countdown Demo">
+          </div>
+          <div class="project-info">
+            <h3 class="project-title" data-i18n="ageCalculatorTitle">Age Calculator & Birthday Countdown</h3>
+            <p class="project-desc" data-i18n="ageCalculatorDesc">
+              حاسبة عمر ذكية مع عداد عيد الميلاد في الوقت الفعلي. احسب عمرك بالسنوات والأشهر والأيام، وراقب الأيام المتبقية لعيد ميلادك القادم مع عد تنازلي حي.
+            </p>
+            <div class="project-links">
+              <a href="javascript:void(0)" onclick="showAgeCalculatorModal()" class="project-link">
+                <i class="fas fa-calculator"></i> <span data-i18n="ageCalculatorTry">تجربة مباشرة</span>
+              </a>
+              <a href="https://github.com/rami0702/My-Info0" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> <span data-i18n="ageCalculatorCode">عرض الكود</span>
+              </a>
+            </div>
+            <div class="project-security-note">
+              <i class="fas fa-lock"></i>
+              <span data-i18n="projectSecurityNote">100% Secure - No data leaves your browser</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game Performance Optimizer Project -->
+        <div class="project-card" style="display: none;">
           <div class="project-image">
             <img src="images/game-optimizer-card.png" class="project-screenshot" alt="Game Performance Optimizer Demo">
           </div>
@@ -432,7 +457,7 @@
         </div>
 
         <!-- Smart Memory Optimizer Project -->
-        <div class="project-card">
+        <div class="project-card" style="display: none;">
           <div class="project-image">
             <img src="images/memory-optimizer-card.png" class="project-screenshot" alt="Smart Memory Optimizer Demo">
           </div>
@@ -1557,6 +1582,92 @@
     
   </div>
 </div>
+
+  <!-- Age Calculator & Birthday Countdown Modal -->
+  <div id="ageCalculatorModal" class="demo-modal img-compressor-modal" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1" style="display:none;">
+    <div class="demo-modal-header">
+      <span class="demo-modal-title" data-i18n="ageCalculatorTitle">Age Calculator & Birthday Countdown</span>
+      <button class="close-demo" type="button" onclick="closeAgeCalculatorModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="img-modal-body">
+      <p class="img-compressor-desc" data-i18n="ageCalculatorDesc">حاسبة عمر ذكية مع عداد عيد الميلاد في الوقت الفعلي.</p>
+      
+      <!-- Age Calculator Section -->
+      <div class="age-calc-section">
+        <h4 style="margin-bottom: 15px;" data-i18n="ageCalculatorSelectDate">اختر تاريخ ميلادك</h4>
+        <input type="date" id="birthDatePickerModal" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--primary); margin-bottom: 15px;">
+        <div class="img-modal-actions">
+          <button type="button" class="img-btn secondary" onclick="setTodayBirthModal()">
+            <i class="fas fa-calendar"></i>
+            <span data-i18n="ageCalculatorToday">اليوم</span>
+          </button>
+          <button type="button" class="img-btn primary" onclick="calculateAgeModal()">
+            <i class="fas fa-calculator"></i>
+            <span data-i18n="ageCalculatorCalculate">احسب عمري</span>
+          </button>
+        </div>
+        
+        <div class="age-result-box" id="ageResultBox" style="display: none; background: rgba(110, 69, 226, 0.1); border: 1px solid var(--primary); border-radius: 12px; padding: 20px; margin-top: 15px; text-align: center;">
+          <div style="font-weight: 600; margin-bottom: 15px;" data-i18n="ageCalculatorYourAge">عمرك بالتفصيل</div>
+          <div class="age-numbers" style="display: flex; justify-content: space-around; gap: 10px; margin-bottom: 15px;">
+            <div class="age-block" style="flex: 1; background: var(--card-bg); padding: 15px; border-radius: 10px;">
+              <div id="yearsValueModal" style="font-size: 1.8rem; font-weight: bold; color: var(--secondary);">0</div>
+              <div style="font-size: 0.9rem; color: var(--gray);" data-i18n="ageCalculatorYears">سنوات</div>
+            </div>
+            <div class="age-block" style="flex: 1; background: var(--card-bg); padding: 15px; border-radius: 10px;">
+              <div id="monthsValueModal" style="font-size: 1.8rem; font-weight: bold; color: var(--secondary);">0</div>
+              <div style="font-size: 0.9rem; color: var(--gray);" data-i18n="ageCalculatorMonths">أشهر</div>
+            </div>
+            <div class="age-block" style="flex: 1; background: var(--card-bg); padding: 15px; border-radius: 10px;">
+              <div id="daysValueModal" style="font-size: 1.8rem; font-weight: bold; color: var(--secondary);">0</div>
+              <div style="font-size: 0.9rem; color: var(--gray);" data-i18n="ageCalculatorDays">أيام</div>
+            </div>
+          </div>
+          <div style="color: var(--gray); font-size: 0.95rem;">
+            <span data-i18n="ageCalculatorTotalDays">إجمالي الأيام:</span> <strong id="totalDaysValueModal">0</strong>
+          </div>
+        </div>
+      </div>
+
+      <hr style="margin: 25px 0; border: 1px solid rgba(110, 69, 226, 0.2);">
+
+      <!-- Birthday Countdown Section -->
+      <div class="birthday-countdown-section">
+        <h4 style="margin-bottom: 15px;" data-i18n="ageCalculatorBirthdayCountdown">عداد عيد الميلاد</h4>
+        <input type="date" id="countdownDatePickerModal" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--primary); margin-bottom: 15px;">
+        <div class="img-modal-actions">
+          <button type="button" class="img-btn secondary" onclick="setTodayCountdownModal()">
+            <i class="fas fa-calendar"></i>
+            <span data-i18n="ageCalculatorToday">اليوم</span>
+          </button>
+          <button type="button" class="img-btn primary" onclick="startCountdownModal()">
+            <i class="fas fa-play"></i>
+            <span data-i18n="ageCalculatorStart">ابدأ العد</span>
+          </button>
+        </div>
+        
+        <div class="countdown-result-box" id="countdownResultBox" style="display: none; background: rgba(110, 69, 226, 0.1); border: 1px solid var(--secondary); border-radius: 12px; padding: 20px; margin-top: 15px; text-align: center;">
+          <div style="font-weight: 600; margin-bottom: 15px; color: var(--secondary);" data-i18n="ageCalculatorDaysUntil">الأيام المتبقية لعيد ميلادك</div>
+          <div id="daysRemainingModal" style="font-size: 3rem; font-weight: bold; color: var(--secondary); margin-bottom: 15px;">--</div>
+          <div style="display: flex; justify-content: space-around; gap: 10px;">
+            <div style="flex: 1;">
+              <div id="hoursRemainingModal" style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">00</div>
+              <div style="font-size: 0.8rem; color: var(--gray);" data-i18n="ageCalculatorHours">ساعة</div>
+            </div>
+            <div style="flex: 1;">
+              <div id="minutesRemainingModal" style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">00</div>
+              <div style="font-size: 0.8rem; color: var(--gray);" data-i18n="ageCalculatorMinutes">دقيقة</div>
+            </div>
+            <div style="flex: 1;">
+              <div id="secondsRemainingModal" style="font-size: 1.5rem; font-weight: bold; color: var(--accent);">00</div>
+              <div style="font-size: 0.8rem; color: var(--gray);" data-i18n="ageCalculatorSeconds">ثانية</div>
+            </div>
+          </div>
+          <div id="countdownMessageModal" style="margin-top: 15px; padding: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; color: var(--accent); font-size: 0.95rem;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
