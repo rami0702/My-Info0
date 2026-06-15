@@ -41,7 +41,7 @@ const en = {
     aboutTitle: "About Me",
     aboutText1: "I am a passionate developer focused on creating exceptional digital experiences. With years of experience in various technologies, I combine technical expertise with creative design.",
     aboutText2: "My journey began with simple scripts and has evolved into complex applications, interactive websites, and immersive games. I love solving problems and creating beautiful, functional solutions.",
-    aboutText3: "In addition, I have continuously developed my technical programming skills and immersed myself in several programming languages. I have challenged myself by implementing complex projects that would normally require a large team in a company. One of my most significant projects was the development of a security system to protect against data theft via QR codes. This system detects and prevents unauthorized access to smartphone data and thus actively contributes to protecting user privacy.",
+    aboutText3: "In addition, I have continuously developed my technical programming skills and immersed myself in several programming languages. I have challenged myself by implementing complex projects that would normally require a large   in a company. One of my most significant projects was the development of a security system to protect against data theft via QR codes. This system detects and prevents unauthorized access to smartphone data and thus actively contributes to protecting user privacy.",
     aboutText4: "I have been working intensively with computers for over 15 years and have extensive experience in the field of hardware. Furthermore, I have developed my own remote access server, similar to Remote Desktop, which I have extended with applications I programmed myself. These allow me to access devices and systems on my private network securely and efficiently.",
 
     // Skills Section
@@ -85,9 +85,9 @@ Object.assign(en, {
     scriptVersion: 'PowerShell Edition v4.0',
     dashboardTitle: 'Analytics Dashboard',
     dashboardDesc: 'An interactive dashboard for real-time data analysis and visualization.',
-    trademarkText: 'RAM - All rights reserved | Developed by the RAM team',
+    trademarkText: 'RAM - All rights reserved | Developed by the RAM  ',
     trademarkText_line1: 'RAM - All rights reserved',
-    trademarkText_line2: 'Developed by the RAM team'
+    trademarkText_line2: 'Developed by the RAM  '
 });
 
 // Expose to window so setLanguage can access reliably
