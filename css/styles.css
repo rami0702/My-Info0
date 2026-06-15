@@ -450,6 +450,7 @@ body.light-mode #globeContainer {
   border-radius: 999px;
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.04);
+  overflow-x: auto;
 }
 
 #topNav ul {
@@ -457,22 +458,31 @@ body.light-mode #globeContainer {
   display: flex;
   gap: 10px;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 #topNav a {
-  color: var(--gray);
+  color: var(--light);
   text-decoration: none;
   font-size: 0.9rem;
+  font-weight: 600;
   padding: 6px 10px;
   border-radius: 999px;
   transition: var(--transition);
   display: inline-block;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+body.light-mode #topNav a {
+  color: var(--dark);
+  text-shadow: none;
 }
 
 #topNav a:hover,
 #topNav a.active {
-  background: var(--primary);
-  color: var(--light);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
 }
 
 /* Ensure top-left nav doesn't overlap on very small screens */
