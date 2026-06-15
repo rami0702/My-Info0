@@ -646,3 +646,172 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ==================== Age Calculator & Birthday Countdown Functions ====================
+let ageCalculatorInterval = null;
+
+function computeAgeModal(birthDate) {
+    if (!birthDate) return {years: 0, months: 0, days: 0, totalDays: 0};
+    const today = new Date();
+    const b = new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+    const t = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    
+    if (b > t) return {years: 0, months: 0, days: 0, totalDays: 0};
+    
+    let years = t.getFullYear() - b.getFullYear();
+    let months = t.getMonth() - b.getMonth();
+    let days = t.getDate() - b.getDate();
+    
+    if (days < 0) {
+        const prevMonthDate = new Date(t.getFullYear(), t.getMonth(), 0);
+        days += prevMonthDate.getDate();
+        months--;
+    }
+    
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+    
+    const totalDays = Math.floor((t - b) / (1000*60*60*24));
+    return {years, months, days, totalDays: totalDays >= 0 ? totalDays : 0};
+}
+
+function calculateAgeModal() {
+    const picker = document.getElementById('birthDatePickerModal');
+    if (!picker || !picker.value) {
+        alert(window[currentLang]?.ageCalculatorSelectDatePrompt || 'Please select a birth date');
+        return;
+    }
+    
+    const birthDate = new Date(picker.value);
+    const age = computeAgeModal(birthDate);
+    
+    document.getElementById('yearsValueModal').textContent = age.years;
+    document.getElementById('monthsValueModal').textContent = age.months;
+    document.getElementById('daysValueModal').textContent = age.days;
+    document.getElementById('totalDaysValueModal').textContent = age.totalDays.toLocaleString();
+    document.getElementById('ageResultBox').style.display = 'block';
+}
+
+function setTodayBirthModal() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = (today.getMonth() + 1).toString().padStart(2, '0');
+    const dd = today.getDate().toString().padStart(2, '0');
+    document.getElementById('birthDatePickerModal').value = `${yyyy}-${mm}-${dd}`;
+    calculateAgeModal();
+}
+
+function getNextBirthdayModal(birthDate) {
+    if (!birthDate) return null;
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const bMonth = birthDate.getMonth();
+    const bDay = birthDate.getDate();
+    
+    let nextBDay = new Date(currentYear, bMonth, bDay);
+    if (nextBDay <= now) nextBDay = new Date(currentYear + 1, bMonth, bDay);
+    
+    const diffMs = nextBDay - now;
+    const totalSec = Math.max(0, Math.floor(diffMs / 1000));
+    const days = Math.floor(totalSec / 86400);
+    const hours = Math.floor((totalSec % 86400) / 3600);
+    const minutes = Math.floor((totalSec % 3600) / 60);
+    const seconds = totalSec % 60;
+    const isToday = (now.getMonth() === bMonth && now.getDate() === bDay);
+    
+    return {days, hours, minutes, seconds, isToday, nextBDay};
+}
+
+function updateCountdownDisplayModal() {
+    const picker = document.getElementById('countdownDatePickerModal');
+    if (!picker || !picker.value) {
+        return;
+    }
+    
+    const birthDate = new Date(picker.value);
+    const info = getNextBirthdayModal(birthDate);
+    
+    if (!info) return;
+    
+    document.getElementById('daysRemainingModal').textContent = info.days;
+    document.getElementById('hoursRemainingModal').textContent = info.hours.toString().padStart(2, '0');
+    document.getElementById('minutesRemainingModal').textContent = info.minutes.toString().padStart(2, '0');
+    document.getElementById('secondsRemainingModal').textContent = info.seconds.toString().padStart(2, '0');
+    
+    const messageEl = document.getElementById('countdownMessageModal');
+    const langPack = window[currentLang] || window.ar;
+    
+    if (info.isToday) {
+        messageEl.innerHTML = (langPack.ageCalculatorBirthdayToday || '🎉 اليوم هو عيد ميلادك! كل عام وأنت بخير 🎉');
+    } else {
+        messageEl.innerHTML = `🎈 ${langPack.ageCalculatorBirthdayOn || 'عيد ميلادك في'} ${info.nextBDay.toLocaleDateString(currentLang)} 🎈`;
+    }
+}
+
+function startCountdownModal() {
+    const picker = document.getElementById('countdownDatePickerModal');
+    if (!picker || !picker.value) {
+        alert(window[currentLang]?.ageCalculatorSelectDatePrompt || 'Please select a birth date');
+        return;
+    }
+    
+    document.getElementById('countdownResultBox').style.display = 'block';
+    
+    // Clear previous interval
+    if (ageCalculatorInterval) clearInterval(ageCalculatorInterval);
+    
+    // Update immediately
+    updateCountdownDisplayModal();
+    
+    // Update every second
+    ageCalculatorInterval = setInterval(updateCountdownDisplayModal, 1000);
+}
+
+function setTodayCountdownModal() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = (today.getMonth() + 1).toString().padStart(2, '0');
+    const dd = today.getDate().toString().padStart(2, '0');
+    document.getElementById('countdownDatePickerModal').value = `${yyyy}-${mm}-${dd}`;
+    startCountdownModal();
+}
+
+function showAgeCalculatorModal() {
+    const modal = document.getElementById('ageCalculatorModal');
+    const overlay = document.querySelector('.demo-overlay');
+    if (!modal) return;
+    
+    modal.style.display = 'block';
+    modal.setAttribute('aria-hidden', 'false');
+    if (overlay) overlay.style.display = 'block';
+    
+    // Reset displays
+    document.getElementById('ageResultBox').style.display = 'none';
+    document.getElementById('countdownResultBox').style.display = 'none';
+}
+
+function closeAgeCalculatorModal() {
+    const modal = document.getElementById('ageCalculatorModal');
+    const overlay = document.querySelector('.demo-overlay');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    }
+    if (overlay) overlay.style.display = 'none';
+    
+    // Clear interval
+    if (ageCalculatorInterval) {
+        clearInterval(ageCalculatorInterval);
+        ageCalculatorInterval = null;
+    }
+}
+
+// Make functions available globally
+window.showAgeCalculatorModal = showAgeCalculatorModal;
+window.closeAgeCalculatorModal = closeAgeCalculatorModal;
+window.calculateAgeModal = calculateAgeModal;
+window.setTodayBirthModal = setTodayBirthModal;
+window.startCountdownModal = startCountdownModal;
+window.setTodayCountdownModal = setTodayCountdownModal;
+
