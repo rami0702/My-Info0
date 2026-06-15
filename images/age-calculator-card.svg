@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Age Calculator Card</title>
+  <desc id="desc">A colorful birthday and calculation card preview.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#6e45e2"/>
+      <stop offset="100%" stop-color="#ff7e5f"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#88d3ce" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d8b4fe" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#bg)" rx="36"/>
+  <circle cx="502" cy="92" r="70" fill="#ff7e5f" fill-opacity="0.18"/>
+  <circle cx="140" cy="326" r="88" fill="#6e45e2" fill-opacity="0.18"/>
+  <rect x="70" y="58" width="500" height="304" rx="28" fill="rgba(15,23,42,0.85)" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="96" y="90" width="180" height="160" rx="28" fill="url(#card)"/>
+  <text x="132" y="150" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Age</text>
+  <text x="132" y="182" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="800">25</text>
+  <text x="132" y="220" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="16" opacity="0.9">Years old</text>
+
+  <rect x="304" y="92" width="240" height="54" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
+  <text x="326" y="126" fill="#88d3ce" font-family="Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Birthday Countdown</text>
+
+  <rect x="304" y="166" width="240" height="90" rx="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+  <text x="330" y="205" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="800">42</text>
+  <text x="380" y="205" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="18" opacity="0.85">days</text>
+  <text x="330" y="236" fill="#ffcc80" font-family="Segoe UI, Arial, sans-serif" font-size="13">until your next birthday</text>
+
+  <rect x="96" y="274" width="448" height="60" rx="20" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.12)"/>
+  <rect x="120" y="292" width="160" height="10" rx="5" fill="url(#glow)" fill-opacity="0.9"/>
+  <rect x="296" y="292" width="90" height="10" rx="5" fill="#88d3ce" fill-opacity="0.8"/>
+  <rect x="400" y="292" width="112" height="10" rx="5" fill="#ff7e5f" fill-opacity="0.8"/>
+  <text x="120" y="322" fill="#fff" font-family="Segoe UI, Arial, sans-serif" font-size="12" opacity="0.9">Live calculation</text>
+</svg>
